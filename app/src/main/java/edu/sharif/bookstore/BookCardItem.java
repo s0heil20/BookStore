@@ -1,9 +1,9 @@
 package edu.sharif.bookstore;
 
-public class SearchBookItem {
+public class BookCardItem {
     private String bookTitle, publisherName, authorName, price;
 
-    public SearchBookItem(String bookTitle, String publisherName, String authorName, String price) {
+    public BookCardItem(String bookTitle, String publisherName, String authorName, String price) {
         this.bookTitle = bookTitle;
         this.publisherName = publisherName;
         this.authorName = authorName;
@@ -26,6 +26,7 @@ public class SearchBookItem {
         return price;
     }
 
+
     public void setBookTitle(String bookTitle) {
         this.bookTitle = bookTitle;
     }
@@ -41,4 +42,5 @@ public class SearchBookItem {
     public void setPrice(String price) {
         this.price = price;
     }
+
 }
