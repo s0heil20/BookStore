@@ -27,6 +27,7 @@
 
         <activity android:name=".MainMenuActivity"></activity>
         <activity android:name=".DetailedBookActivity"></activity>
+        <activity android:name=".FinalizeOrderActivity"></activity>
     </application>
 
 </manifest>
