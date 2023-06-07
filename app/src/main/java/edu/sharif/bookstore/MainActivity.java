@@ -15,5 +15,8 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(new Intent(this, DetailedBookActivity.class));
 //        startActivity(new Intent(this, SearchActivity.class));
 // startActivity(new Intent(this, MainMenuActivity.class));
+//        startActivity(new Intent(this, SearchActivity.class));
+
+//        startActivity(new Intent(this, MainMenuActivity.class));
     }
 }

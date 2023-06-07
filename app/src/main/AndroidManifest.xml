@@ -25,6 +25,11 @@
 
         </activity>
 
+        <activity android:name=".ShoppingCartActivity">
+
+
+        </activity>
+
         <activity android:name=".MainMenuActivity"></activity>
         <activity android:name=".DetailedBookActivity"></activity>
         <activity android:name=".FinalizeOrderActivity"></activity>
