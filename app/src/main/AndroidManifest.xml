@@ -24,6 +24,8 @@
         <activity android:name=".SearchActivity">
 
         </activity>
+
+        <activity android:name=".MainMenuActivity"></activity>
     </application>
 
 </manifest>
