@@ -1,10 +1,11 @@
 package edu.sharif.bookstore;
 
 import android.os.AsyncTask;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import edu.sharif.bookstore.utils.NetworkUtils;
 
 public class FetchBook extends AsyncTask<String, Void, String> {
     private String titleText;
@@ -17,7 +18,7 @@ public class FetchBook extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        return NetworkUtils.getBookInfo(strings[0]);
+        return null;
     }
 
     @Override

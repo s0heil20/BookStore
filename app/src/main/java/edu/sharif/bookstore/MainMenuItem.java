@@ -1,24 +1,26 @@
 package edu.sharif.bookstore;
 
+import android.graphics.drawable.Drawable;
+
 public class MainMenuItem {
 
-    int image;
+    Drawable image;
     String title;
     String rating;
     String price;
 
-    public MainMenuItem(int image, String title, String rating, String price){
+    public MainMenuItem(Drawable image, String title, String rating, String price){
         this.image = image;
         this.title = title;
         this.rating = rating;
         this.price = price;
     }
 
-    public int getImage() {
+    public Drawable getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(Drawable image) {
         this.image = image;
     }
 
