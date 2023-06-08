@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -22,17 +23,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // Test for query and google API!
+        startActivity(new Intent(this, MainMenuActivity.class));
 
-        drawer = findViewById(R.id.drawerLayout);
-        NavigationView navigationView = findViewById(R.id.navView);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_drawer_open,R.string.nav_drawer_close);
-
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        drawer = findViewById(R.id.drawerLayout);
+//        NavigationView navigationView = findViewById(R.id.navView);
+//        navigationView.setNavigationItemSelectedListener(this);
+//
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_drawer_open,R.string.nav_drawer_close);
+//
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
 
 //        startActivity(new Intent(this, SignUpSignInActivity.class));
