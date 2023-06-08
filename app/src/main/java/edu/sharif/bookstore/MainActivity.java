@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         sqlDatabaseManager.getRatingDatabaseManager().addRating(
                 "o", 19
         );
+        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 8);
+        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 10);
 //        sqlDatabaseManager.getRatingDatabaseManager().addRating(
 //                "t", 8
 //        );

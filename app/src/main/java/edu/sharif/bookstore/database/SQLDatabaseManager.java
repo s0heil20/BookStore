@@ -21,6 +21,8 @@ public class SQLDatabaseManager extends SQLiteOpenHelper {
 
     private final RatingDatabaseManager ratingDatabaseManager;
 
+    private final StockDatabaseManager stockDatabaseManager;
+
 
     public UserDatabaseManager getUserDatabaseManager() {
         return userDatabaseManager;
@@ -42,6 +44,10 @@ public class SQLDatabaseManager extends SQLiteOpenHelper {
         return ratingDatabaseManager;
     }
 
+    public StockDatabaseManager getStockDatabaseManager() {
+        return stockDatabaseManager;
+    }
+
     public SQLDatabaseManager(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
@@ -50,6 +56,7 @@ public class SQLDatabaseManager extends SQLiteOpenHelper {
         favouriteDatabaseManager = FavouriteDatabaseManager.instanceOfFavouriteDatabaseManager(this);
         cartDatabaseManager = CartDatabaseManager.instanceOfCartDatabaseManager(this);
         ratingDatabaseManager = RatingDatabaseManager.instanceOfRatingDatabaseManager(this);
+        stockDatabaseManager = StockDatabaseManager.instanceOfStockDatabaseManager(this);
 
     }
 
@@ -67,6 +74,7 @@ public class SQLDatabaseManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(favouriteDatabaseManager.createTableString());
         sqLiteDatabase.execSQL(cartDatabaseManager.createTableString());
         sqLiteDatabase.execSQL(ratingDatabaseManager.createTableString());
+        sqLiteDatabase.execSQL(stockDatabaseManager.createTableString());
     }
 
 
@@ -77,6 +85,7 @@ public class SQLDatabaseManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + favouriteDatabaseManager.getTableName());
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + cartDatabaseManager.getTableName());
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ratingDatabaseManager.getTableName());
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + stockDatabaseManager.getTableName());
         onCreate(sqLiteDatabase);
     }
 
