@@ -1,6 +1,11 @@
 package edu.sharif.bookstore.database;
 
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
+import edu.sharif.bookstore.entity.Feedback;
+
 public class FeedbackDatabaseManager implements EntityDatabaseManager{
     private static FeedbackDatabaseManager feedbackDatabaseManager;
     private static final String TABLE_NAME = "FeedbackDB";
@@ -38,7 +43,7 @@ public class FeedbackDatabaseManager implements EntityDatabaseManager{
                 .append(" TEXT, ")
                 .append(COMMENT_FIELD)
                 .append(" TEXT, ")
-                .append(COMMENT_FIELD)
+                .append(RATING_FIELD)
                 .append(" TEXT)");
 
         return sql.toString();
@@ -47,6 +52,18 @@ public class FeedbackDatabaseManager implements EntityDatabaseManager{
     @Override
     public String getTableName() {
         return TABLE_NAME;
+    }
+
+    public void addFeedback(Feedback feedback){
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USER_NAME_FIELD, feedback.getUsername());
+        contentValues.put(COMMENT_FIELD, feedback.getComment());
+        contentValues.put(BOOK_ID_FIELD, feedback.getBookId());
+        contentValues.put(RATING_FIELD, feedback.getRating());
+
+        sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
 
 }

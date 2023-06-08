@@ -45,8 +45,10 @@ public class SQLDatabaseManager extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         Log.d("salammm", "onCreate: "+ userDatabaseManager.createTableString());
-        Log.d("salammm", "onCreate: "+ feedbackDatabaseManager.createTableString());
+
         sqLiteDatabase.execSQL(userDatabaseManager.createTableString());
+
+        Log.d("salammm", "onCreate: "+ feedbackDatabaseManager.createTableString());
         sqLiteDatabase.execSQL(feedbackDatabaseManager.createTableString());
     }
 
