@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        startActivity(new Intent(this, SignUpSignInActivity.class));
+
         startActivity(new Intent(this, FinalizeOrderActivity.class));
 
         UserDatabaseManager userDatabaseManager = UserDatabaseManager.instanceOfDatabase(this);

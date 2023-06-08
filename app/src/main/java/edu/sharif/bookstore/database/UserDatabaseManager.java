@@ -72,7 +72,7 @@ public class UserDatabaseManager extends SQLiteOpenHelper {
         return true;
     }
 
-    private boolean doesUsernameExists(User user){
+    public boolean doesUsernameExists(User user){
         SQLiteDatabase userDatabase = userDatabaseManager.getReadableDatabase();
 
         StringBuilder sql;
@@ -87,5 +87,24 @@ public class UserDatabaseManager extends SQLiteOpenHelper {
         Cursor result = userDatabase.rawQuery(sql.toString(), new String[]{user.getUsername()});
         return result.getCount() > 0;
 
+    }
+
+    public boolean checkUserPassword(User user){
+        SQLiteDatabase userDatabase = userDatabaseManager.getReadableDatabase();
+
+        StringBuilder sql;
+        sql = new StringBuilder()
+                .append("SELECT * FROM ")
+                .append(TABLE_NAME)
+                .append(" WHERE ")
+                .append(USER_NAME_FIELD)
+                .append(" = ? ");
+
+
+        Cursor result = userDatabase.rawQuery(sql.toString(), new String[]{user.getUsername()});
+        if (result.moveToFirst() && result.getString(1).equals(user.getPassword())) {
+            return true;
+        }
+        return false;
     }
 }
