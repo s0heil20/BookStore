@@ -1,48 +1,33 @@
 package edu.sharif.bookstore;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
-import com.google.android.material.navigation.NavigationView;
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    protected DrawerLayout drawer;
+public class SignUpSignInActivity extends MainActivity {
+    private ViewFlipper viewFlipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_up_sign_in);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        viewFlipper = findViewById(R.id.viewFlipper);
+    }
 
-        drawer = findViewById(R.id.drawerLayout);
-        NavigationView navigationView = findViewById(R.id.navView);
-        navigationView.setNavigationItemSelectedListener(this);
+    public void goToSignIn(View view) {
+        viewFlipper.showNext();
+    }
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_drawer_open,R.string.nav_drawer_close);
-
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-
-//        startActivity(new Intent(this, SignUpSignInActivity.class));
-//        startActivity(new Intent(this, FinalizeOrderActivity.class));
-//        startActivity(new Intent(this, DetailedBookActivity.class));
-//        startActivity(new Intent(this, SearchActivity.class));
-// startActivity(new Intent(this, MainMenuActivity.class));
-//        startActivity(new Intent(this, SearchActivity.class));
-
-//        startActivity(new Intent(this, MainMenuActivity.class));
+    public void goToSignUp(View view) {
+        viewFlipper.showPrevious();
     }
 
     @Override
