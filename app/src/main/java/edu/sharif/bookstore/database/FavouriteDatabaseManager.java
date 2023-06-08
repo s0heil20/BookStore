@@ -34,8 +34,6 @@ public class FavouriteDatabaseManager implements EntityDatabaseManager {
                 .append(ID_FIELD)
                 .append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
                 .append(USER_NAME_FIELD)
-                .append(" TEXT NOT NULL UNIQUE, ")
-                .append(USER_NAME_FIELD)
                 .append(" TEXT, ")
                 .append(BOOK_ID_FIELD)
                 .append(" TEXT)");

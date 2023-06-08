@@ -24,14 +24,26 @@ public class MainActivity extends AppCompatActivity {
 
         SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
         sqlDatabaseManager.dropTables();
-        boolean res = sqlDatabaseManager.getUserDatabaseManager().signUpUser(
-                new User("b", "b", "rouzbeh"));
-        boolean res2 =sqlDatabaseManager.getUserDatabaseManager().signUpUser(
-                new User("a", "a", "rouzbeh"));
-        sqlDatabaseManager.getFeedbackDatabaseManager().addFeedback(
-                new Feedback("a", "comment", "eee", 8));
-
-        Log.d("salammm", "onCreate: "+res + res2);
+        sqlDatabaseManager.getRatingDatabaseManager().addRating(
+                "o", 90
+        );
+        sqlDatabaseManager.getRatingDatabaseManager().addRating(
+                "o", 9
+        );
+        sqlDatabaseManager.getRatingDatabaseManager().addRating(
+                "o", 19
+        );
+//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
+//                "t", 8
+//        );
+//        boolean res = sqlDatabaseManager.getUserDatabaseManager().signUpUser(
+//                new User("b", "b", "rouzbeh"));
+//        boolean res2 =sqlDatabaseManager.getUserDatabaseManager().signUpUser(
+//                new User("a", "a", "rouzbeh"));
+//        sqlDatabaseManager.getFeedbackDatabaseManager().addFeedback(
+//                new Feedback("a", "comment", "eee", 8));
+//
+//        Log.d("salammm", "onCreate: "+res + res2);
 
 //        startActivity(new Intent(this, DetailedBookActivity.class));
 //        startActivity(new Intent(this, SearchActivity.class));
