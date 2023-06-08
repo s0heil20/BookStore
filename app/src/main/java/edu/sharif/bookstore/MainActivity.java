@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.database.UserDatabaseManager;
+import edu.sharif.bookstore.entity.Feedback;
 import edu.sharif.bookstore.entity.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,9 +20,16 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(new Intent(this, MainMenuActivity.class));
 
-        UserDatabaseManager userDatabaseManager = UserDatabaseManager.instanceOfDatabase(this);
-        boolean res = userDatabaseManager.signUpUser(new User("a", "a", "rouzbeh"));
-        boolean res2 =userDatabaseManager.signUpUser(new User("a", "a", "rouzbeh"));
+
+
+        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+        sqlDatabaseManager.dropTables();
+        boolean res = sqlDatabaseManager.getUserDatabaseManager().signUpUser(
+                new User("b", "b", "rouzbeh"));
+        boolean res2 =sqlDatabaseManager.getUserDatabaseManager().signUpUser(
+                new User("a", "a", "rouzbeh"));
+        sqlDatabaseManager.getFeedbackDatabaseManager().addFeedback(
+                new Feedback("a", "comment", "eee", 8));
 
         Log.d("salammm", "onCreate: "+res + res2);
 
