@@ -53,6 +53,7 @@ public class BookJsonParserUtil {
         String description = volumeInfo.getString("description");
         String category = volumeInfo.getJSONArray("categories").getString(0);
         String imageLink = imageLinks.getString("thumbnail");
-        return new Book(bookId, title, authors, publisher, description, category, imageLink, pageCount);
+        String datePublished = volumeInfo.getString("publishedDate");
+        return new Book(bookId, title, authors, publisher, datePublished, description, category, imageLink, pageCount);
     }
 }

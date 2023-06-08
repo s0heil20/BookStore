@@ -16,13 +16,15 @@ public class Book {
     private String imageLink;
     private int pageCount;
     private Drawable image;
+    private String datePublished;
 
     // Local Fields
-    private int avgRating;
+    private float avgRating;
     private int numbersLeft;
     private int price;
+    private int noRatings;
 
-    public Book(String bookId, String title, List<String> authors, String publisher, String description, String category, String imageLink, int pageCount) {
+    public Book(String bookId, String title, List<String> authors, String publisher, String datePublished, String description, String category, String imageLink, int pageCount) {
         this.bookId = bookId;
         this.title = title;
         this.authors = authors;
@@ -31,7 +33,12 @@ public class Book {
         this.category = category;
         this.imageLink = imageLink;
         this.pageCount = pageCount;
+        this.datePublished = datePublished;
+        // TODO Must be set from database!
         this.price = 100;
+        this.avgRating = (float) 2.5;
+        this.noRatings = 100;
+        this.numbersLeft = 10;
     }
 
     public String getBookId() {
@@ -98,7 +105,7 @@ public class Book {
         this.pageCount = pageCount;
     }
 
-    public int getAvgRating() {
+    public float getAvgRating() {
         return avgRating;
     }
 
@@ -124,5 +131,29 @@ public class Book {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getNoRatings() {
+        return noRatings;
+    }
+
+    public String getDatePublished() {
+        return datePublished;
+    }
+
+    public void setDatePublished(String datePublished) {
+        this.datePublished = datePublished;
+    }
+
+    public void setAvgRating(float avgRating) {
+        this.avgRating = avgRating;
+    }
+
+    public void setNoRatings(int noRatings) {
+        this.noRatings = noRatings;
     }
 }

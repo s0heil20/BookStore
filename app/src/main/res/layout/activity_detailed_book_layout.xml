@@ -6,265 +6,238 @@
     android:scrollbars="none"
     android:layout_weight="1">
 
-
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp">
-
-            <RelativeLayout
-                android:id="@+id/basicInfoRelativeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TableLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/bookImageViewDetailed"
-                    android:padding="5dp">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/titleTextViewDetailed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="TextView" />
-
-                        <TextView
-                            android:id="@+id/ratingTextViewDetailed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="TextView" />
-
-                        <TextView
-                            android:id="@+id/noRatingTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="TextView" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/publisherTextViewDetailed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="TextView" />
-
-                        <TextView
-                            android:id="@+id/yearTextViewDetailed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="TextView" />
-
-                        <TextView
-                            android:id="@+id/virastTextViewDetailed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="TextView" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/authorsTextViewDetailed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="salam" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/priceTextViewDetailed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="TextView" />
-
-                        <TextView
-                            android:id="@+id/leftTextViewDetailed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="TextView" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/categoryTextViewDetailed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="TextView" />
-                    </TableRow>
-                </TableLayout>
-
-                <ImageView
-                    android:id="@+id/bookImageViewDetailed"
-                    android:layout_width="150dp"
-                    android:layout_height="210dp"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
-            </RelativeLayout>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/descriptionTextViewDetailed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="TextView" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp" >
+        <RelativeLayout
+            android:id="@+id/basicInfoRelativeLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_toRightOf="@id/bookImageViewDetailed"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-                <Button
-                    android:id="@+id/buyButtonDetailed"
+                <TextView
+                    android:id="@+id/titleTextViewDetailed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Buy"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/addToFavoriteButtonDetailed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    android:text="Add to Favorite" />
-
-                <Button
-                    android:id="@+id/shareButtonDetailed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    android:text="Share" />
-            </LinearLayout>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp" >
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
+                    android:layout_margin="5dp"
+                    android:ellipsize="end"
+                    android:maxWidth="150dp"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:text="TextView" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/noRatingTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text=" Rate this book: " />
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="TextView" />
 
-                    <RatingBar
-                        android:id="@+id/ratingBarDetailed"
+                    <TextView
+                        android:id="@+id/ratingTextViewDetailed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        />
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="TextView" />
+
                 </LinearLayout>
 
-
-
-
-                <com.google.android.material.textfield.TextInputLayout
-
-
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/authorsTextViewDetailed"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:contentDescription="Enter your comment here(Optional)!"
-                    android:ems="10"
-                    android:hint="Comment (Optional)"
-                    android:singleLine="false"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small">
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:text="salam" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/commentTextInput"
-                        android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/priceTextViewDetailed"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="top"
-                        android:inputType="textMultiLine"
-                        android:lines="6"
-                        android:overScrollMode="always"
-                        android:scrollbarStyle="insideInset"
-                        android:scrollbars="vertical"
-                        android:scrollHorizontally="false" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="TextView" />
 
-                <Button
-                    android:id="@+id/submitButtonDetailed"
+                    <TextView
+                        android:id="@+id/leftTextViewDetailed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="TextView" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Submit" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/pageCountTextViewDetailed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="TextView" />
+
+                    <TextView
+                        android:id="@+id/yearTextViewDetailed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="TextView" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/categoryTextViewDetailed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:text="sasdf" />
 
             </LinearLayout>
-        </TableRow>
 
+            <ImageView
+                android:id="@+id/bookImageViewDetailed"
+                android:layout_width="150dp"
+                android:layout_height="250dp"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
 
+        </RelativeLayout>
 
-        <TableRow
+        <TextView
+            android:id="@+id/descriptionTextViewDetailed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="TextView" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp" >
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buyButtonDetailed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/addToFavoriteButtonDetailed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="Add to Favorite" />
+
+            <Button
+                android:id="@+id/shareButtonDetailed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="Share" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
 
             <LinearLayout
-                android:id="@+id/commentsListDetailed"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"></LinearLayout>
-        </TableRow>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    </TableLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=" Rate this book: " />
+
+                <RatingBar
+                    android:id="@+id/ratingBarDetailed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="Enter your comment here(Optional)!"
+                android:ems="10"
+                android:hint="Comment (Optional)"
+                android:singleLine="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/commentTextInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:lines="6"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:scrollHorizontally="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/submitButtonDetailed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+        android:id="@+id/commentsListDetailed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>
+
+
+
+    </LinearLayout>
+
 </ScrollView>
