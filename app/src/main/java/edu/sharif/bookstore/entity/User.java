@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.entity;
 
 public class User {
     private String username, password, nickname;

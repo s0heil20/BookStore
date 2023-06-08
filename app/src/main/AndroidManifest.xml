@@ -15,8 +15,10 @@
         android:theme="@style/Theme.BookStore"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpSignInActivity"
-            android:exported="false" />
+            android:name=".BaseActivity"
+            android:exported="false"
+            android:label="@string/title_activity_base"
+            android:theme="@style/Theme.BookStore.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -26,8 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".ShoppingCartActivity" />
+        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".ShoppingCartActivity"></activity>
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".DetailedBookActivity" />
         <activity android:name=".FinalizeOrderActivity" />
