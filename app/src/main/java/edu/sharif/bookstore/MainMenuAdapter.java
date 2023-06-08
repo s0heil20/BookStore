@@ -30,7 +30,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuViewHolder> {
         holder.titleTextView.setText(items.get(position).getTitle());
         holder.ratingTextView.setText(items.get(position).getRating());
         holder.priceTextView.setText(items.get(position).getPrice());
-        holder.bookImageView.setImageResource(items.get(position).getImage());
+        holder.bookImageView.setImageDrawable(items.get(position).getImage());
     }
 
     @Override
