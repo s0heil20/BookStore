@@ -6,12 +6,12 @@ public class MainMenuItem {
 
     Drawable image;
     String title;
-    String rating;
+    float rating;
     String price;
     String bookId;
 
 
-    public MainMenuItem(Drawable image, String title, String rating, String price, String bookId){
+    public MainMenuItem(Drawable image, String title, float rating, String price, String bookId){
         this.image = image;
         this.title = title;
         this.rating = rating;
@@ -35,11 +35,11 @@ public class MainMenuItem {
         this.title = title;
     }
 
-    public String getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 

@@ -3,7 +3,9 @@ package edu.sharif.bookstore;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,27 +13,62 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import edu.sharif.bookstore.database.SQLDatabaseManager;
+
 public class FinalizeOrderActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private ImageView calendarImageButton;
-    private TextView dateTextView;
+    private TextView dateTextView, totalPriceTextView;
+    private Button submitButton;
+    private TextInputEditText addressText;
+    private SQLDatabaseManager sqlDatabaseManager;
+
     private static final long oneDay = 24*60*60*1000;
     private static final long oneWeek = 7*24*60*60*1000;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finalize_cart);
+        sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
 
-        calendarImageButton = (ImageView) findViewById(R.id.calendarImageViewButton);
+        loadAllViews();
 
+        configureTotalCostTextView(totalPriceTextView);
         configureImageButton(calendarImageButton);
-        dateTextView = (TextView) findViewById(R.id.dateTextViewFinal);
+        configureSubmitButton(submitButton);
 
+
+    }
+
+    private void loadAllViews(){
+        calendarImageButton = (ImageView) findViewById(R.id.calendarImageViewButton);
+        dateTextView = (TextView) findViewById(R.id.dateTextViewFinal);
+        totalPriceTextView = (TextView) findViewById(R.id.totalCostTextViewFinal);
+        submitButton = (Button) findViewById(R.id.submitButtonFinalize);
+        addressText = (TextInputEditText) findViewById(R.id.addressTextInput);
+    }
+
+    private void configureSubmitButton(Button submitButton){
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int totalPrice = Integer.valueOf(totalPriceTextView.getText().toString());
+                String address = addressText.getText().toString();
+                String date = dateTextView.getText().toString();
+                sqlDatabaseManager.getCartDatabaseManager().finalizeCart(address, date, totalPrice);
+            }
+        });
+    }
+
+    private void configureTotalCostTextView(TextView totalPriceTextView){
+        // sqlDatabaseManager.getCartDatabaseManager().g
     }
 
     private void configureImageButton(ImageView calendarImageButton){

@@ -31,7 +31,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MainMenuViewHolder holder, int position) {
         holder.titleTextView.setText(items.get(position).getTitle());
-        holder.ratingTextView.setText(items.get(position).getRating());
+        holder.ratingBarMainMenu.setRating(items.get(position).getRating());
         holder.priceTextView.setText(items.get(position).getPrice());
         holder.bookImageView.setImageDrawable(items.get(position).getImage());
         holder.relativeLayout.setOnClickListener((new View.OnClickListener(

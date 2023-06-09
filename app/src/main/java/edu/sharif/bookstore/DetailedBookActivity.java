@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -19,10 +20,13 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.entity.Book;
+import edu.sharif.bookstore.entity.Feedback;
 
 public class DetailedBookActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Book> {
 
+    private LinearLayout mainLinearLayout;
     private String bookId;
     private Button buyButton;
     private Button addOrRemoveFromFavoriteButton;
@@ -41,11 +45,12 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
     private TextView leftTextViewDetailed;
     private TextView descriptionTextViewDetailed;
     private ImageView imageViewDetailed;
+    private SQLDatabaseManager sqlDatabaseManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
         if (getIntent().getExtras().containsKey("bookId")){
             this.bookId = getIntent().getStringExtra("bookId");
         }
@@ -55,10 +60,7 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
         // TODO load all comments on create!
 
 
-        configureBuyButton(buyButton);
-        configureAddOrRemoveFromFavoriteButton(addOrRemoveFromFavoriteButton);
-        configureShareButton(shareButton);
-        configureSubmitButton(submitButton);
+
 
         Bundle bookIdBundle = new Bundle();
         bookIdBundle.putString("bookId", this.bookId);
@@ -67,6 +69,8 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
     }
 
     private void loadAllViews() {
+        // main layout!
+        this.mainLinearLayout = (LinearLayout) findViewById(R.id.mainLinearLayoutDetailed);
         // Text Views!
         this.titleTextViewDetailed = ((TextView) findViewById(R.id.titleTextViewDetailed));
         this.priceTextViewDetailed = ((TextView) findViewById(R.id.priceTextViewDetailed));
@@ -86,7 +90,7 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
         // image view!
         this.imageViewDetailed = (ImageView) findViewById(R.id.bookImageViewDetailed);
         // text input!
-        this.commentTextInput = findViewById(R.id.commentTextInput);
+        this.commentTextInput = (TextInputEditText) findViewById(R.id.commentTextInput);
         // rating bar!
         this.ratingBar =  findViewById(R.id.ratingBarDetailed);
 
@@ -97,7 +101,11 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String commentText = commentTextInput.getText().toString();
+                String userName = sqlDatabaseManager.getUserDatabaseManager().getLoggedInUser().getUsername();
+                int rating = (ratingBar.getNumStars());
+                Feedback feedback = new Feedback(userName, commentText, bookId, rating);
+                sqlDatabaseManager.getFeedbackDatabaseManager().addFeedback(feedback);
             }
         });
     }
@@ -117,7 +125,7 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
         addOrRemoveFromFavoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sqlDatabaseManager.getFavouriteDatabaseManager().addBookToFavourites(bookId);
             }
         });
     }
@@ -127,7 +135,7 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                sqlDatabaseManager.getCartDatabaseManager().addToCart(bookId);
             }
         });
     }
@@ -150,6 +158,31 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
         ((TextView) findViewById(R.id.descriptionTextViewDetailed)).setText(book.getDescription());
     }
 
+    private void configureButtons(){
+        configureBuyButton(buyButton);
+        configureAddOrRemoveFromFavoriteButton(addOrRemoveFromFavoriteButton);
+        configureShareButton(shareButton);
+        configureSubmitButton(submitButton);
+    }
+
+    private void loadAllFeedBacks(){
+        List<Feedback> feedbacks = sqlDatabaseManager.getFeedbackDatabaseManager().getBookFeedbacks(bookId);
+        for (Feedback feedback : feedbacks) {
+            this.mainLinearLayout.addView(createFeedbackView(feedback));
+        }
+    }
+
+    private View createFeedbackView(Feedback feedback){
+        View feedbackView = getLayoutInflater().inflate(R.layout.comment_layout, null, false);
+        TextView usernameTextView = (TextView) feedbackView.findViewById(R.id.userIdComment);
+        TextView ratingTextView = (TextView) feedbackView.findViewById(R.id.ratingComment);
+        TextView commentTextView = (TextView) feedbackView.findViewById(R.id.descriptionComment);
+        usernameTextView.setText(feedback.getUsername());
+        ratingTextView.setText(feedback.getRating()+"");
+        commentTextView.setText(feedback.getComment());
+        return feedbackView;
+    }
+
 
     @Override
     public Loader<Book> onCreateLoader(int id, Bundle args) {
@@ -163,6 +196,8 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
         if (book != null) {
             configureTextViews(book);
         }
+        configureButtons();
+        loadAllFeedBacks();
     }
 
     @Override
