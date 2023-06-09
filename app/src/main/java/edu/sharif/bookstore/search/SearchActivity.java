@@ -40,6 +40,8 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
 
     SearchView searchView;
 
+    String queryString, queryType = "inTitle";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,13 +53,17 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
         adapterItems = new ArrayAdapter<String>(this, R.layout.dropdown_item, dropdownItems);
 
         autoCompleteTextView.setAdapter(adapterItems);
+
+        autoCompleteTextView.setText(dropdownItems[0],false);
+
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 String item = adapterView.getItemAtPosition(i).toString();
                 Log.d("salam", "onItemClick: " + item);
-                Toast.makeText(SearchActivity.this, item, Toast.LENGTH_SHORT).show();
+                queryType = "in" + item;
+                getQueryResult(queryString, queryType);
             }
         });
 
@@ -77,15 +83,15 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                getQueryResult(s, "inTitle");
+                queryString = s;
+                getQueryResult(queryString, queryType);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
+                queryString = s;
                 return false;
-
-
             }
         });
 
@@ -131,6 +137,5 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
     @Override
     public void onItemClicked(BookCardItem bookCardItem) {
         startActivity(new Intent(this, DetailedBookActivity.class).putExtra("bookId", bookCardItem.getBookId()));
-
     }
 }
