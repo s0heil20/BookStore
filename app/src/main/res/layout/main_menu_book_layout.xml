@@ -28,22 +28,34 @@
         />
 
 
-
-    <TextView
-        android:id="@+id/ratingTextView"
-        android:layout_width="match_parent"
+    <RatingBar
+        android:id="@+id/ratingMainMenu"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/bookImageView"
+        style="?android:attr/ratingBarStyleSmall"
+        android:theme="@style/RatingBar"
         android:layout_below="@id/titleTextView"
-        android:text="TextView"
-        android:layout_marginTop="10dp"/>
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:layout_marginTop="10dp"
+        android:isIndicator="true" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/ratingTextView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_toEndOf="@id/bookImageView"-->
+<!--        android:layout_below="@id/titleTextView"-->
+<!--        android:text="TextView"-->
+<!--        android:layout_marginTop="10dp"/>-->
 
     <TextView
         android:id="@+id/priceTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/bookImageView"
-        android:layout_below="@id/ratingTextView"
+        android:layout_below="@id/ratingMainMenu"
         android:text="TextView"
         android:layout_marginTop="10dp"/>
 

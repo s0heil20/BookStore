@@ -8,10 +8,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.database.UserDatabaseManager;
 import edu.sharif.bookstore.entity.Feedback;
 import edu.sharif.bookstore.entity.User;
+import edu.sharif.bookstore.utils.BookIdListJSONConverter;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
@@ -25,7 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(this, SearchActivity.class));
+//        ArrayList<String> bookIds = new ArrayList<String>();
+//        bookIds.add("1");
+//        bookIds.add("2");
+//        bookIds.add("3");
+//
+//        System.out.println(BookIdListJSONConverter.bookIdListToJSON(bookIds).toString());
+//        System.out.println(BookIdListJSONConverter.JSONArrayToBookIdList(BookIdListJSONConverter.bookIdListToJSON(bookIds)));
+
+        startActivity(new Intent(this, MainMenuActivity.class));
 
 
 

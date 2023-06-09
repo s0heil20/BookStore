@@ -7,6 +7,7 @@
     android:layout_weight="1">
 
     <LinearLayout
+        android:id="@+id/mainLinearLayoutDetailed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -185,6 +186,7 @@
                     android:id="@+id/ratingBarDetailed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:theme="@style/RatingBar"
                     android:layout_weight="1"
                     />
             </LinearLayout>

@@ -4,6 +4,9 @@ import android.graphics.drawable.Drawable;
 
 import java.util.List;
 
+import edu.sharif.bookstore.database.PriceDatabaseManager;
+import edu.sharif.bookstore.database.SQLDatabaseManager;
+
 public class Book {
 
     // Remote Fields
@@ -35,6 +38,7 @@ public class Book {
         this.pageCount = pageCount;
         this.datePublished = datePublished;
         // TODO Must be set from database!
+        // SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase()
         this.price = 100;
         this.avgRating = (float) 2.5;
         this.noRatings = 100;

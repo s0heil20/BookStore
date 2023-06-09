@@ -60,7 +60,7 @@ public class MainMenuActivity extends NavBarActivity implements LoaderManager.Lo
     private void addBookItemsToRecyclerView(List<Book> books) {
         List<MainMenuItem> items = new ArrayList<MainMenuItem>();
         for (Book book : books) {
-            items.add(new MainMenuItem(book.getImage(), book.getTitle(), book.getAvgRating()+"", book.getPrice()+"", book.getBookId()));
+            items.add(new MainMenuItem(book.getImage(), book.getTitle(), book.getAvgRating(), book.getPrice()+"", book.getBookId()));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MainMenuAdapter(getApplicationContext(), items, this));
@@ -87,7 +87,7 @@ public class MainMenuActivity extends NavBarActivity implements LoaderManager.Lo
     @Override
     public void onItemClicked(MainMenuItem bookItem) {
         // TODO make intent to go to detailed activity with bookID!
-        Toast.makeText(this, "CLICKED ON" + bookItem.bookId , Toast.LENGTH_LONG).show();
+        // Toast.makeText(this, "CLICKED ON " + bookItem.bookId , Toast.LENGTH_LONG).show();
         startActivity(new Intent(this, DetailedBookActivity.class).putExtra("bookId", bookItem.bookId));
     }
 }

@@ -26,13 +26,11 @@ public class ListOfBooksLoader extends AsyncTaskLoader {
 
     @Override
     public List<Book> loadInBackground() {
-
         ArrayList<Book> books = new ArrayList<Book>();
         for (String bookId : this.bookIds) {
             String bookJson = NetworkUtils.getBookJsonStringById(bookId);
             if (bookJson != null) {
                 try {
-
                     Book book = BookJsonParserUtil.bookJsonIntoBookObject(bookJson);
                     book.setImage(NetworkUtils.downloadBookThumbnailWithURL(book.getImageLink()));
                     books.add(book);
