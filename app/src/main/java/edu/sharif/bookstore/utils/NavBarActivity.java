@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import edu.sharif.bookstore.ProfileActivity;
 import edu.sharif.bookstore.R;
 
 public class NavBarActivity extends AppCompatActivity {
@@ -29,7 +31,7 @@ public class NavBarActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_profile:
-                        Toast.makeText(getApplicationContext(),"profile",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(NavBarActivity.this, ProfileActivity.class));
                         break;
                     default:
                         Toast.makeText(getApplicationContext(),"is not implemented yet.",Toast.LENGTH_SHORT).show();

@@ -19,10 +19,13 @@ public class UserDatabaseManager implements EntityDatabaseManager {
     private static final String PASSWORD_FIELD = "password";
     private static final String NICKNAME_FIELD = "nickname";
 
+    private User loggedInUser;
+
     private SQLDatabaseManager sqlDatabaseManager;
 
-    public UserDatabaseManager(SQLDatabaseManager sqlDatabaseManager) {
+    private UserDatabaseManager(SQLDatabaseManager sqlDatabaseManager) {
         this.sqlDatabaseManager = sqlDatabaseManager;
+        this.loggedInUser = null;
     }
 
     public static UserDatabaseManager instanceOfUserDatabaseManager(SQLDatabaseManager sqlDatabaseManager) {
@@ -101,7 +104,7 @@ public class UserDatabaseManager implements EntityDatabaseManager {
 
         Cursor result = sqLiteDatabase.rawQuery(sql.toString(), new String[]{user.getUsername()});
         result.moveToFirst();
-        String password = result.getString(1);
+        String password = result.getString(2);
         return password.equals(user.getPassword());
     }
 
@@ -119,7 +122,29 @@ public class UserDatabaseManager implements EntityDatabaseManager {
 
         Cursor result = sqLiteDatabase.rawQuery(sql.toString(), new String[]{user.getUsername()});
         result.moveToFirst();
-        String nickname = result.getString(2);
-        return nickname;
+        return result.getString(3);
+    }
+
+    public void setLoggedInUser(User loggedInUser) {
+        this.loggedInUser = loggedInUser;
+    }
+
+    public User getLoggedInUser() {
+        return this.loggedInUser;
+    }
+
+    public void changePassword(User user) {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_NAME, USER_NAME_FIELD + "=?", new String[]{user.getUsername()});
+        sqLiteDatabase.close();
+
+        getLoggedInUser().setPassword(user.getPassword());
+        signUpUser(user);
+    }
+
+    public void deleteLoggedInUser() {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_NAME, USER_NAME_FIELD + "=?", new String[]{getLoggedInUser().getUsername()});
+        sqLiteDatabase.close();
     }
 }
