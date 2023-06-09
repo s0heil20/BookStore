@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
+import org.json.JSONException;
+
 import java.util.List;
 
 import edu.sharif.bookstore.entity.Book;
@@ -27,11 +29,17 @@ public class SingleBookLoader extends AsyncTaskLoader {
 
     @Override
     public Book loadInBackground() {
-        List<Book> books = BookJsonParserUtil.booksJsonArrayIntoBooksObjectArray(NetworkUtils.searchBookWithQueryAndGetJsonString(this.bookId, null, "relevance", "1"));
-        if (books.size() > 0) {
-            Book theBook = books.get(0);
-            theBook.setImage(NetworkUtils.downloadBookThumbnailWithURL(theBook.getImageLink()));
-            return theBook;
+        String bookJson = NetworkUtils.getBookJsonStringById(this.bookId);
+        if (bookJson != null) {
+            try {
+
+                Book book = BookJsonParserUtil.bookJsonIntoBookObject(bookJson);
+                book.setImage(NetworkUtils.downloadBookThumbnailWithURL(book.getImageLink()));
+                return book;
+            } catch (JSONException e) {
+                System.out.println("Result Empty!");
+                e.printStackTrace();
+            }
         }
         return null;
     }

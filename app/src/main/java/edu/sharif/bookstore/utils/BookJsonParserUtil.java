@@ -39,21 +39,53 @@ public class BookJsonParserUtil {
 
     public static Book bookJsonIntoBookObject(String bookJson) throws JSONException {
         JSONObject bookObject = new JSONObject(bookJson);
-        String bookId = bookObject.getString("id");
-        JSONObject volumeInfo = bookObject.getJSONObject("volumeInfo");
-        ArrayList<String> authors = new ArrayList<String>();
-        String publisher = volumeInfo.getString("publisher");
-        String title = volumeInfo.getString("title");
-        JSONArray authorsJSON = volumeInfo.getJSONArray("authors");
-        for (int i = 0; i < authorsJSON.length(); i++) {
-            authors.add(authorsJSON.getString(i));
-        }
-        int pageCount = volumeInfo.getInt("pageCount");
-        JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-        String description = volumeInfo.getString("description");
-        String category = volumeInfo.getJSONArray("categories").getString(0);
-        String imageLink = imageLinks.getString("thumbnail");
-        String datePublished = volumeInfo.getString("publishedDate");
-        return new Book(bookId, title, authors, publisher, datePublished, description, category, imageLink, pageCount);
+        //------------------
+        String bookId;
+        if (bookObject.has("selfLink")) {
+            bookId = bookObject.getString("selfLink");
+        } else { throw new JSONException("Book missing id link!"); }
+
+        JSONObject volumeInfo;
+        if (bookObject.has("volumeInfo")){
+             volumeInfo = bookObject.getJSONObject("volumeInfo");
+             ArrayList<String> authors = new ArrayList<String>();
+             if (volumeInfo.has("authors")) {
+                 JSONArray authorsJSON = volumeInfo.getJSONArray("authors");
+                 for (int i = 0; i < authorsJSON.length(); i++) {
+                     authors.add(authorsJSON.getString(i));
+                 }
+             }
+             String publisher = "DEFAULT PUBLISHER";
+             if (volumeInfo.has("publisher")){
+                 publisher = volumeInfo.getString("publisher");
+             }
+             String title = "DEFAULT TITLE";
+             if (volumeInfo.has("title")){
+                 title = volumeInfo.getString("title");
+             }
+             int pageCount = 0;
+             if (volumeInfo.has("pageCount")){
+                 pageCount = volumeInfo.getInt("pageCount");
+             }
+             JSONObject imageLinks;
+             String imageLink;
+             if (volumeInfo.has("imageLinks")){
+                 imageLinks = volumeInfo.getJSONObject("imageLinks");
+                 imageLink = imageLinks.getString("thumbnail");
+             } else { throw new JSONException("Book missing image!"); }
+             String description = "DEFAULT DESCRIPTION!";
+             if (volumeInfo.has("description")){
+                 description = volumeInfo.getString("description");
+             }
+             String category = "DEFAULT CATEGORY";
+             if (volumeInfo.has("categories")) {
+                 category = volumeInfo.getJSONArray("categories").getString(0);
+             }
+             String datePublished = "0000-00-00";
+             if (volumeInfo.has("publishedDate")){
+                 datePublished = volumeInfo.getString("publishedDate");
+             }
+            return new Book(bookId, title, authors, publisher, datePublished, description, category, imageLink, pageCount);
+        } else { throw new JSONException("Book missing volume info!"); }
     }
 }

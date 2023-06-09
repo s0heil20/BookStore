@@ -2,6 +2,7 @@ package edu.sharif.bookstore;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,12 +12,14 @@ import java.util.List;
 
 public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuViewHolder> {
 
-    Context context;
-    List<MainMenuItem> items;
+    private Context context;
+    private List<MainMenuItem> items;
+    private SelectMainMenuItemInterface listener;
 
-    public MainMenuAdapter(Context context, List<MainMenuItem> items) {
+    public MainMenuAdapter(Context context, List<MainMenuItem> items, SelectMainMenuItemInterface listener) {
         this.context = context;
         this.items = items;
+        this.listener = listener;
     }
 
     @NonNull
@@ -31,10 +34,19 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuViewHolder> {
         holder.ratingTextView.setText(items.get(position).getRating());
         holder.priceTextView.setText(items.get(position).getPrice());
         holder.bookImageView.setImageDrawable(items.get(position).getImage());
+        holder.relativeLayout.setOnClickListener((new View.OnClickListener(
+
+        ) {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClicked(items.get(holder.getAdapterPosition()));
+            }
+        }));
     }
 
     @Override
     public int getItemCount() {
         return items.size();
     }
+
 }
