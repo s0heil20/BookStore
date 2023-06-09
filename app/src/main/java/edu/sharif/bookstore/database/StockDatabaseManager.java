@@ -85,7 +85,6 @@ public class StockDatabaseManager implements EntityDatabaseManager {
 
             sqLiteDatabase.execSQL(sql.toString());
         }
-
     }
 
     public int getBookStock(String bookId){

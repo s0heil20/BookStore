@@ -2,19 +2,21 @@ package edu.sharif.bookstore.database;
 
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
 import edu.sharif.bookstore.entity.Feedback;
+import edu.sharif.bookstore.entity.User;
 
-public class FeedbackDatabaseManager implements EntityDatabaseManager{
+public class FeedbackDatabaseManager implements EntityDatabaseManager {
     private static FeedbackDatabaseManager feedbackDatabaseManager;
     private static final String TABLE_NAME = "FeedbackDB";
     private static final String ID_FIELD = "_id";
     private static final String USER_NAME_FIELD = "user_name";
     private static final String BOOK_ID_FIELD = "book_id";
-    private static final String COMMENT_FIELD = "nickname";
+    private static final String COMMENT_FIELD = "comment";
     private static final String RATING_FIELD = "rating";
 
     private SQLDatabaseManager sqlDatabaseManager;
@@ -23,8 +25,8 @@ public class FeedbackDatabaseManager implements EntityDatabaseManager{
         this.sqlDatabaseManager = sqlDatabaseManager;
     }
 
-    public static FeedbackDatabaseManager instanceOfFeedbackDatabaseManager(SQLDatabaseManager sqlDatabaseManager){
-        if (feedbackDatabaseManager == null){
+    public static FeedbackDatabaseManager instanceOfFeedbackDatabaseManager(SQLDatabaseManager sqlDatabaseManager) {
+        if (feedbackDatabaseManager == null) {
             feedbackDatabaseManager = new FeedbackDatabaseManager(sqlDatabaseManager);
         }
         return feedbackDatabaseManager;
@@ -46,7 +48,7 @@ public class FeedbackDatabaseManager implements EntityDatabaseManager{
                 .append(COMMENT_FIELD)
                 .append(" TEXT, ")
                 .append(RATING_FIELD)
-                .append(" TEXT)");
+                .append(" INT)");
 
         return sql.toString();
     }
@@ -56,7 +58,7 @@ public class FeedbackDatabaseManager implements EntityDatabaseManager{
         return TABLE_NAME;
     }
 
-    public void addFeedback(Feedback feedback){
+    public void addFeedback(Feedback feedback) {
         SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -71,8 +73,32 @@ public class FeedbackDatabaseManager implements EntityDatabaseManager{
     }
 
 
-    public ArrayList<Feedback> getBookFeedbacks(String bookId){
-        return null;
+    public ArrayList<Feedback> getBookFeedbacks(String bookId) {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getReadableDatabase();
+
+        StringBuilder sql;
+        sql = new StringBuilder()
+                .append("SELECT * FROM ")
+                .append(TABLE_NAME)
+                .append(" WHERE ")
+                .append(BOOK_ID_FIELD)
+                .append(" = ? ");
+
+
+        Cursor result = sqLiteDatabase.rawQuery(sql.toString(), new String[]{bookId});
+
+        ArrayList<Feedback> feedbacks = new ArrayList<>();
+        while (result.moveToNext()) {
+            String username = result.getString(1);
+            String comment = result.getString(3);
+            int rating = result.getInt(4);
+
+            feedbacks.add(new Feedback(username, comment, bookId, rating));
+
+        }
+
+        sqLiteDatabase.close();
+        return feedbacks;
     }
 
 }

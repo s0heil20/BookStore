@@ -1,6 +1,7 @@
 package edu.sharif.bookstore.database;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
@@ -61,13 +62,39 @@ public class FavouriteDatabaseManager implements EntityDatabaseManager {
         contentValues.put(BOOK_ID_FIELD, bookId);
 
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+        sqLiteDatabase.close();
     }
 
     public void removeFromFavourites(String bookId){
+        User loggedInUser = sqlDatabaseManager.getUserDatabaseManager().getLoggedInUser();
 
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_NAME, BOOK_ID_FIELD + "=?, " + USER_NAME_FIELD + "=? ",
+                new String[]{bookId, loggedInUser.getUsername()});
+        sqLiteDatabase.close();
     }
 
     public ArrayList<String> getFavouriteBooks(){
-        return null;
+        User loggedInUser = sqlDatabaseManager.getUserDatabaseManager().getLoggedInUser();
+
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getReadableDatabase();
+
+        StringBuilder sql;
+        sql = new StringBuilder()
+                .append("SELECT * FROM ")
+                .append(TABLE_NAME)
+                .append(" WHERE ")
+                .append(USER_NAME_FIELD)
+                .append(" = ? ");
+
+
+        Cursor result = sqLiteDatabase.rawQuery(sql.toString(), new String[]{loggedInUser.getUsername()});
+
+        ArrayList<String> favouriteBooks = new ArrayList<>();
+        while (result.moveToNext()){
+            String bookId = result.getString(2);
+            favouriteBooks.add(bookId);
+        }
+        return favouriteBooks;
     }
 }

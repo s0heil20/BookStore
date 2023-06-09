@@ -12,8 +12,8 @@ public class RatingDatabaseManager implements EntityDatabaseManager {
     private static final String TABLE_NAME = "RatingDB";
     private static final String ID_FIELD = "_id";
     private static final String BOOK_ID_FIELD = "book_id";
-    private static final String SCORE_SUM_FIELD = "score_sum";
     private static final String SCORE_NUM_FIELD = "score_num";
+    private static final String SCORE_SUM_FIELD = "score_sum";
 
 
     private SQLDatabaseManager sqlDatabaseManager;
@@ -68,10 +68,8 @@ public class RatingDatabaseManager implements EntityDatabaseManager {
             sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         } else {
             row.moveToFirst();
-            Log.d("salammm", "addRating: " + DatabaseUtils.dumpCursorToString(row));
-            int scoreSum = row.getInt(3);
-            Log.d("salammm", "addRating33: "+ scoreSum);
             int scoreNum = row.getInt(2);
+            int scoreSum = row.getInt(3);
 
             StringBuilder sql;
             sql = new StringBuilder()
@@ -123,11 +121,30 @@ public class RatingDatabaseManager implements EntityDatabaseManager {
         return result;
     }
 
-    public float getAverageRating(String bookId){
-        return 0;
+    public float getAverageRating(String bookId) {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
+
+        Cursor row = getBookRow(bookId);
+
+        if (row.getCount() == 0) {
+            return 0;
+        } else {
+            return (float)row.getInt(3) / (float)row.getInt(2);
+        }
+
     }
 
-    public int getTotalRatingNum(String bookId){
-        return 0;
+    public int getTotalRatingNum(String bookId) {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
+
+        Cursor row = getBookRow(bookId);
+
+        if (row.getCount() == 0) {
+            return 0;
+        } else {
+            return row.getInt(2);
+        }
     }
+
+
 }
