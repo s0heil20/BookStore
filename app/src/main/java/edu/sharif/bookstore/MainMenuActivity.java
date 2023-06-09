@@ -1,6 +1,8 @@
 package edu.sharif.bookstore;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,8 +20,9 @@ import java.util.List;
 
 import edu.sharif.bookstore.entity.Book;
 import edu.sharif.bookstore.utils.BookJsonParserUtil;
+import edu.sharif.bookstore.utils.NavBarActivity;
 
-public class MainMenuActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Book>> {
+public class MainMenuActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<List<Book>>, SelectMainMenuItemInterface {
     private static final String sampleListQueryString = "android java";
     private static final String sampleListQueryType = "intitle";
     private ArrayList<Book> bookList;
@@ -29,7 +32,8 @@ public class MainMenuActivity extends AppCompatActivity implements LoaderManager
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu_layout);
+        setContentView(R.layout.nav_main_menu);
+        handleParentView(R.layout.nav_main_menu);
 
         recyclerView = findViewById(R.id.bookListRecyclerView);
 
@@ -56,10 +60,10 @@ public class MainMenuActivity extends AppCompatActivity implements LoaderManager
     private void addBookItemsToRecyclerView(List<Book> books) {
         List<MainMenuItem> items = new ArrayList<MainMenuItem>();
         for (Book book : books) {
-            items.add(new MainMenuItem(book.getImage(), book.getTitle(), "2", "100$"));
+            items.add(new MainMenuItem(book.getImage(), book.getTitle(), book.getAvgRating()+"", book.getPrice()+"", book.getBookId()));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MainMenuAdapter(getApplicationContext(), items));
+        recyclerView.setAdapter(new MainMenuAdapter(getApplicationContext(), items, this));
     }
 
 
@@ -78,5 +82,12 @@ public class MainMenuActivity extends AppCompatActivity implements LoaderManager
     @Override
     public void onLoaderReset(@NonNull Loader<List<Book>> loader) {
 
+    }
+
+    @Override
+    public void onItemClicked(MainMenuItem bookItem) {
+        // TODO make intent to go to detailed activity with bookID!
+        Toast.makeText(this, "CLICKED ON" + bookItem.bookId , Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, DetailedBookActivity.class).putExtra("bookId", bookItem.bookId));
     }
 }

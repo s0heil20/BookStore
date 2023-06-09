@@ -27,20 +27,21 @@ public class NetworkUtils {
     private static final String PRINT_TYPE = "printType";
     private static final String SORTING_TYPE = "orderBy";
     public static String searchBookWithQueryAndGetJsonString(String queryString, String queryType, String sortingType, String maxResult) {
-        HttpURLConnection urlConnection = null;
-        BufferedReader reader = null;
-        String bookJSONString = null;
-        if (queryType != null) {
-            queryString = queryString + "+" + queryType;
-        }
-        try {
-            Uri builtUri = Uri.parse(BOOK_BASE_URL).buildUpon()
+        Uri builtUri = Uri.parse(BOOK_BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, queryString)
                     .appendQueryParameter(MAX_RESULT, maxResult)
                     .appendQueryParameter(PRINT_TYPE, "books")
                     .appendQueryParameter(SORTING_TYPE, sortingType)
                     .build();
-            URL requestURL = new URL(builtUri.toString());
+        return NetworkUtils.getJSONStringForGivenURI(builtUri.toString());
+    }
+
+    public static String getJSONStringForGivenURI(String uri) {
+        HttpURLConnection urlConnection = null;
+        BufferedReader reader = null;
+        String bookJSONString = null;
+        try {
+            URL requestURL = new URL(uri);
 
             urlConnection = (HttpURLConnection) requestURL.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -67,10 +68,10 @@ public class NetworkUtils {
             e.printStackTrace();
             return null;
         } finally {
-            if(urlConnection!=null){
+            if (urlConnection != null) {
                 urlConnection.disconnect();
             }
-            if(reader != null) {
+            if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException e) {
@@ -110,7 +111,7 @@ public class NetworkUtils {
     }
 
     public static String getBookJsonStringById(String bookId){
-        return searchBookWithQueryAndGetJsonString("id:" + bookId, null, "relevance","1");
+        return getJSONStringForGivenURI(bookId);
     }
 }
 

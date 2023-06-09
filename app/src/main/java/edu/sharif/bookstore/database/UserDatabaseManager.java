@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import edu.sharif.bookstore.entity.User;
 
-public class UserDatabaseManager implements EntityDatabaseManager{
+public class UserDatabaseManager implements EntityDatabaseManager {
 
     private static UserDatabaseManager userDatabaseManager;
     private static final String TABLE_NAME = "UserDB";
@@ -19,14 +19,17 @@ public class UserDatabaseManager implements EntityDatabaseManager{
     private static final String PASSWORD_FIELD = "password";
     private static final String NICKNAME_FIELD = "nickname";
 
+    private User loggedInUser;
+
     private SQLDatabaseManager sqlDatabaseManager;
 
-    public UserDatabaseManager(SQLDatabaseManager sqlDatabaseManager) {
+    private UserDatabaseManager(SQLDatabaseManager sqlDatabaseManager) {
         this.sqlDatabaseManager = sqlDatabaseManager;
+        this.loggedInUser = null;
     }
 
-    public static UserDatabaseManager instanceOfUserDatabaseManager(SQLDatabaseManager sqlDatabaseManager){
-        if (userDatabaseManager == null){
+    public static UserDatabaseManager instanceOfUserDatabaseManager(SQLDatabaseManager sqlDatabaseManager) {
+        if (userDatabaseManager == null) {
             userDatabaseManager = new UserDatabaseManager(sqlDatabaseManager);
         }
         return userDatabaseManager;
@@ -47,7 +50,7 @@ public class UserDatabaseManager implements EntityDatabaseManager{
                 .append(NICKNAME_FIELD)
                 .append(" TEXT)");
 
-       return sql.toString();
+        return sql.toString();
     }
 
     @Override
@@ -55,7 +58,7 @@ public class UserDatabaseManager implements EntityDatabaseManager{
         return TABLE_NAME;
     }
 
-    public boolean signUpUser(User user){
+    public boolean signUpUser(User user) {
         if (doesUsernameExists(user))
             return false;
 
@@ -70,7 +73,7 @@ public class UserDatabaseManager implements EntityDatabaseManager{
         return true;
     }
 
-    private boolean doesUsernameExists(User user){
+    public boolean doesUsernameExists(User user) {
         SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getReadableDatabase();
 
         StringBuilder sql;
@@ -85,5 +88,63 @@ public class UserDatabaseManager implements EntityDatabaseManager{
         Cursor result = sqLiteDatabase.rawQuery(sql.toString(), new String[]{user.getUsername()});
         return result.getCount() > 0;
 
+    }
+
+    public boolean checkPassword(User user) {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getReadableDatabase();
+
+        StringBuilder sql;
+        sql = new StringBuilder()
+                .append("SELECT * FROM ")
+                .append(TABLE_NAME)
+                .append(" WHERE ")
+                .append(USER_NAME_FIELD)
+                .append(" = ? ");
+
+
+        Cursor result = sqLiteDatabase.rawQuery(sql.toString(), new String[]{user.getUsername()});
+        result.moveToFirst();
+        String password = result.getString(2);
+        return password.equals(user.getPassword());
+    }
+
+    public String getUserNickname(User user) {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getReadableDatabase();
+
+        StringBuilder sql;
+        sql = new StringBuilder()
+                .append("SELECT * FROM ")
+                .append(TABLE_NAME)
+                .append(" WHERE ")
+                .append(USER_NAME_FIELD)
+                .append(" = ? ");
+
+
+        Cursor result = sqLiteDatabase.rawQuery(sql.toString(), new String[]{user.getUsername()});
+        result.moveToFirst();
+        return result.getString(3);
+    }
+
+    public void setLoggedInUser(User loggedInUser) {
+        this.loggedInUser = loggedInUser;
+    }
+
+    public User getLoggedInUser() {
+        return this.loggedInUser;
+    }
+
+    public void changePassword(User user) {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_NAME, USER_NAME_FIELD + "=?", new String[]{user.getUsername()});
+        sqLiteDatabase.close();
+
+        getLoggedInUser().setPassword(user.getPassword());
+        signUpUser(user);
+    }
+
+    public void deleteLoggedInUser() {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_NAME, USER_NAME_FIELD + "=?", new String[]{getLoggedInUser().getUsername()});
+        sqLiteDatabase.close();
     }
 }

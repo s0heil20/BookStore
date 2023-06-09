@@ -8,12 +8,15 @@ public class MainMenuItem {
     String title;
     String rating;
     String price;
+    String bookId;
 
-    public MainMenuItem(Drawable image, String title, String rating, String price){
+
+    public MainMenuItem(Drawable image, String title, String rating, String price, String bookId){
         this.image = image;
         this.title = title;
         this.rating = rating;
         this.price = price;
+        this.bookId = bookId;
     }
 
     public Drawable getImage() {
