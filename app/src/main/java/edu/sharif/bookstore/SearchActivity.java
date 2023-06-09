@@ -21,8 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.sharif.bookstore.entity.Book;
+import edu.sharif.bookstore.utils.NavBarActivity;
 
-public class SearchActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Book>> {
+public class SearchActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<List<Book>> {
     RecyclerView recyclerView;
     BookCardAdapter adapter;
     ArrayList<BookCardItem> items;
@@ -37,7 +38,8 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.nav_search);
+        handleParentView(R.layout.nav_search);
 
 
         autoCompleteTextView = findViewById(R.id.autoCompleteText);
