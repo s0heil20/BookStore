@@ -97,4 +97,25 @@ public class FavouriteDatabaseManager implements EntityDatabaseManager {
         }
         return favouriteBooks;
     }
+
+    public boolean isBookInFavourites(String bookId){
+        User loggedInUser = sqlDatabaseManager.getUserDatabaseManager().getLoggedInUser();
+
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getReadableDatabase();
+
+        StringBuilder sql;
+        sql = new StringBuilder()
+                .append("SELECT * FROM ")
+                .append(TABLE_NAME)
+                .append(" WHERE ")
+                .append(USER_NAME_FIELD)
+                .append(" = ? ,")
+                .append(BOOK_ID_FIELD)
+                .append(" = ? ");
+
+
+        Cursor result = sqLiteDatabase.rawQuery(sql.toString(), new String[]{loggedInUser.getUsername(), bookId});
+
+        return result.getCount() > 0;
+    }
 }

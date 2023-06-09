@@ -25,7 +25,6 @@ public class CartDatabaseManager implements EntityDatabaseManager {
     private static final String TOTAL_PRICE_FIELD = "total_price";
 
 
-
     private SQLDatabaseManager sqlDatabaseManager;
 
     private ArrayList<String> bookIds;
@@ -71,8 +70,6 @@ public class CartDatabaseManager implements EntityDatabaseManager {
     }
 
 
-
-
     public void addToCart(String bookId) {
         bookIds.add(bookId);
     }
@@ -94,6 +91,14 @@ public class CartDatabaseManager implements EntityDatabaseManager {
         contentValues.put(TOTAL_PRICE_FIELD, totalPrice);
 
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+
+
+    }
+
+    private void reduceBookStock() {
+        for (String bookId : bookIds) {
+            sqlDatabaseManager.getStockDatabaseManager().reduceStock(bookId, 1);
+        }
     }
 
 
@@ -114,9 +119,9 @@ public class CartDatabaseManager implements EntityDatabaseManager {
         Cursor result = sqLiteDatabase.rawQuery(sql.toString(), new String[]{loggedInUser.getUsername()});
         ArrayList<Cart> cartList = new ArrayList<>();
 
-        while (result.moveToNext()){
+        while (result.moveToNext()) {
             String cartId = result.getString(0);
-            String bookIdsString  = result.getString(2);
+            String bookIdsString = result.getString(2);
             String address = result.getString(3);
             String date = result.getString(4);
             int totalPrice = result.getInt(5);
