@@ -15,10 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import edu.sharif.bookstore.database.SQLDatabaseManager;
+import edu.sharif.bookstore.database.UserDatabaseManager;
 import edu.sharif.bookstore.entity.User;
 
 public class SignUpSignInActivity extends AppCompatActivity {
-    private static User loggedInUser;
     private ViewFlipper viewFlipper;
 
     private static final String fileName = "login";
@@ -32,11 +32,16 @@ public class SignUpSignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_sign_in2);
 
-        loggedInUser = new User("", "", "");
-
         sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(username)) {
-            startActivity(new Intent(this, FakeActivity.class));
+            String storedUsername = sharedPreferences.getString(username, "");
+            String storedPassword = sharedPreferences.getString(password, "");
+            SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+            User user = new User(storedUsername, storedPassword, "");
+            String storedNickname = sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user);
+            user.setNickname(storedNickname);
+            sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
+            startActivity(new Intent(this, MainMenuActivity.class));
         }
 
         viewFlipper = findViewById(R.id.viewFlipper);
@@ -108,27 +113,24 @@ public class SignUpSignInActivity extends AppCompatActivity {
 
         User user = new User(username, password, "");
         SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
-        user.setNickname(sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user));
-        if (sqlDatabaseManager.getUserDatabaseManager().checkPassword(user)) {
-            if (remember) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(SignUpSignInActivity.username, username);
-                editor.putString(SignUpSignInActivity.password, password);
-                editor.commit();
+
+        if (sqlDatabaseManager.getUserDatabaseManager().doesUsernameExists(user)) {
+            user.setNickname(sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user));
+            if (sqlDatabaseManager.getUserDatabaseManager().checkPassword(user)) {
+                if (remember) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(SignUpSignInActivity.username, username);
+                    editor.putString(SignUpSignInActivity.password, password);
+                    editor.commit();
+                }
+
+                sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
+                startActivity(new Intent(this, MainMenuActivity.class));
+            } else {
+                Toast.makeText(this, "incorrect password.", Toast.LENGTH_LONG).show();
             }
-
-            setLoggedInUser(user);
-            startActivity(new Intent(this, FakeActivity.class));
         } else {
-            Toast.makeText(this, "incorrect password.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "username does not exist.", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public static User getLoggedInUser() {
-        return loggedInUser;
-    }
-
-    public static void setLoggedInUser(User loggedInUser) {
-        SignUpSignInActivity.loggedInUser = loggedInUser;
     }
 }

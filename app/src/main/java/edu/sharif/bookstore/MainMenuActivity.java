@@ -20,8 +20,9 @@ import java.util.List;
 
 import edu.sharif.bookstore.entity.Book;
 import edu.sharif.bookstore.utils.BookJsonParserUtil;
+import edu.sharif.bookstore.utils.NavBarActivity;
 
-public class MainMenuActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Book>>, SelectMainMenuItemInterface {
+public class MainMenuActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<List<Book>>, SelectMainMenuItemInterface {
     private static final String sampleListQueryString = "android java";
     private static final String sampleListQueryType = "intitle";
     private ArrayList<Book> bookList;
@@ -31,7 +32,8 @@ public class MainMenuActivity extends AppCompatActivity implements LoaderManager
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu_layout);
+        setContentView(R.layout.nav_main_menu);
+        handleParentView(R.layout.nav_main_menu);
 
         recyclerView = findViewById(R.id.bookListRecyclerView);
 

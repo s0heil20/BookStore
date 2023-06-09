@@ -18,13 +18,14 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String fileName = "login";
     private static final String username = "username";
+    private static final String password = "password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(this, FinalizeOrderActivity.class));
+//        startActivity(new Intent(this, FinalizeOrderActivity.class));
 //
 //
 //
@@ -59,11 +60,19 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(new Intent(this, SearchActivity.class));
 
 //        startActivity(new Intent(this, MainMenuActivity.class));
-//        sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
-//        if (sharedPreferences.contains(username)) {
-//            startActivity(new Intent(this, FakeActivity.class));
-//        } else {
-//            startActivity(new Intent(this, SignUpSignInActivity.class));
-//        }
+
+        sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
+        if (sharedPreferences.contains(username)) {
+            String storedUsername = sharedPreferences.getString(username, "");
+            String storedPassword = sharedPreferences.getString(password, "");
+            SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+            User user = new User(storedUsername, storedPassword, "");
+            String storedNickname = sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user);
+            user.setNickname(storedNickname);
+            sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
+            startActivity(new Intent(this, MainMenuActivity.class));
+        } else {
+            startActivity(new Intent(this, SignUpSignInActivity.class));
+        }
     }
 }
