@@ -68,7 +68,7 @@ public class SignUpSignInActivity extends AppCompatActivity {
         TextInputLayout nicknameInput = findViewById(R.id.signUpNickname);
         String nickname = nicknameInput.getEditText().getText().toString();
 
-        boolean checkLengthResult = checkLength("username", username) && checkLength("password", username) && checkLength("confirmPassword", username) && checkLength("nickname", username);
+        boolean checkLengthResult = checkLength("username", username) && checkLength("password", password) && checkLength("nickname", nickname);
         boolean checkConfirmPasswordResult = checkConfirmPassword(password, confirmPassword);
 
         if (checkLengthResult && checkConfirmPasswordResult) {

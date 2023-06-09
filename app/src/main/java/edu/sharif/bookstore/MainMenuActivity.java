@@ -28,7 +28,6 @@ public class MainMenuActivity extends NavBarActivity implements LoaderManager.Lo
     private ArrayList<Book> bookList;
     private RecyclerView recyclerView;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
