@@ -1,6 +1,7 @@
 package edu.sharif.bookstore;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -22,6 +23,7 @@ import edu.sharif.bookstore.entity.Book;
 
 public class DetailedBookActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Book> {
 
+    private String bookId;
     private Button buyButton;
     private Button addOrRemoveFromFavoriteButton;
     private Button shareButton;
@@ -40,8 +42,6 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
     private TextView descriptionTextViewDetailed;
     private ImageView imageViewDetailed;
 
-    private String bookId;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +55,7 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
         // TODO load all comments on create!
 
 
-        configureButButton(buyButton);
+        configureBuyButton(buyButton);
         configureAddOrRemoveFromFavoriteButton(addOrRemoveFromFavoriteButton);
         configureShareButton(shareButton);
         configureSubmitButton(submitButton);
@@ -79,32 +79,57 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
         this.leftTextViewDetailed = ((TextView) findViewById(R.id.leftTextViewDetailed));
         this.descriptionTextViewDetailed = ((TextView) findViewById(R.id.descriptionTextViewDetailed));
         // Buttons!
-        this.buyButton = findViewById(R.id.buyButtonDetailed);
-        this.addOrRemoveFromFavoriteButton = findViewById(R.id.addToFavoriteButtonDetailed);
-        this.shareButton = findViewById(R.id.shareButtonDetailed);
-        this.submitButton = findViewById(R.id.submitButtonDetailed);
-        this.ratingBar = findViewById(R.id.ratingBarDetailed);
-        this.commentTextInput = findViewById(R.id.commentTextInput);
+        this.buyButton = (Button) findViewById(R.id.buyButtonDetailed);
+        this.addOrRemoveFromFavoriteButton = (Button) findViewById(R.id.addToFavoriteButtonDetailed);
+        this.shareButton = (Button) findViewById(R.id.shareButtonDetailed);
+        this.submitButton = (Button) findViewById(R.id.submitButtonDetailed);
         // image view!
         this.imageViewDetailed = (ImageView) findViewById(R.id.bookImageViewDetailed);
+        // text input!
+        this.commentTextInput = findViewById(R.id.commentTextInput);
+        // rating bar!
+        this.ratingBar =  findViewById(R.id.ratingBarDetailed);
 
 
     }
 
     private void configureSubmitButton(Button submitButton) {
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     private void configureShareButton(Button shareButton) {
         // TODO create intent to share with available apps!
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void configureAddOrRemoveFromFavoriteButton(Button addOrRemoveFromFavoriteButton) {
         // TODO give book name to be added to favorites!
+        addOrRemoveFromFavoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
-    private void configureButButton(Button buyButton) {
+    private void configureBuyButton(Button buyButton) {
         // TODO proceed to next activity!
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void configureTextViews(Book book) {
