@@ -1,5 +1,6 @@
 package edu.sharif.bookstore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -136,6 +137,7 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
             @Override
             public void onClick(View v) {
                 sqlDatabaseManager.getCartDatabaseManager().addToCart(bookId);
+                startActivity(new Intent(getBaseContext(), FinalizeOrderActivity.class));
             }
         });
     }
