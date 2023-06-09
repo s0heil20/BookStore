@@ -19,8 +19,9 @@ import java.util.Calendar;
 
 import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
+import edu.sharif.bookstore.navigationBar.NavBarActivity;
 
-public class FinalizeOrderActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class FinalizeOrderActivity extends NavBarActivity implements DatePickerDialog.OnDateSetListener {
 
     private ImageView calendarImageButton;
     private TextView dateTextView, totalPriceTextView;
@@ -33,7 +34,8 @@ public class FinalizeOrderActivity extends AppCompatActivity implements DatePick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_finalize_cart);
+        setContentView(R.layout.nav_finalize_cart);
+        handleParentView(R.layout.nav_finalize_cart);
         sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
 
         loadAllViews();

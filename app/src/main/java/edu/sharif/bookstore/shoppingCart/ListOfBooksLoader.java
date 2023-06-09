@@ -1,4 +1,4 @@
-package edu.sharif.bookstore.cart;
+package edu.sharif.bookstore.shoppingCart;
 
 import android.content.Context;
 

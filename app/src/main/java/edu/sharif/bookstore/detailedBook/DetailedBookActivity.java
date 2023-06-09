@@ -22,8 +22,9 @@ import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.entity.Book;
 import edu.sharif.bookstore.entity.Feedback;
+import edu.sharif.bookstore.navigationBar.NavBarActivity;
 
-public class DetailedBookActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Book> {
+public class DetailedBookActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<Book> {
 
     private LinearLayout mainLinearLayout;
     private String bookId;
@@ -191,7 +192,8 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<Book> loader, Book book) {
-        setContentView(R.layout.activity_detailed_book_layout);
+        setContentView(R.layout.nav_detailed_book_layout);
+        handleParentView(R.layout.nav_detailed_book_layout);
         loadAllViews();
         if (book != null) {
             configureTextViews(book);
