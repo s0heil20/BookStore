@@ -36,20 +36,19 @@ public class CartHistoryAdapter extends RecyclerView.Adapter<CartHistoryViewHold
 
         StringBuilder bookData = new StringBuilder();
         for (Book book : items.get(position).getBooks()) {
-            bookData.append("Title: " +
-                    book.getTitle() +
-                    "\nAuthors: " +
-                    String.join(", ", book.getAuthors()) +
-                    "\n Publisher: " +
-                    book.getPublisher() +
-                    "\n Price: " +
-                    book.getPrice() +
-                    "\n\n"
-            );
+            bookData
+                    .append(book.getTitle())
+                    .append("\nAuthors: ")
+                    .append(String.join(", ", book.getAuthors()))
+                    .append("\nPublisher: ")
+                    .append(book.getPublisher())
+                    .append("\nPrice: ")
+                    .append(book.getPrice() + "$")
+                    .append("\n\n");
         }
         holder.booksTV.setText(bookData.toString());
 
-        holder.totalPriceTV.setText(items.get(position).getTotalPrice());
+        holder.totalPriceTV.setText("Total Price: " + items.get(position).getTotalPrice() + "$");
     }
 
     @Override
