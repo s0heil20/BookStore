@@ -1,8 +1,9 @@
 package edu.sharif.bookstore.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cart {
+public class Cart implements Serializable {
     private String cartId, address, date;
     private int totalPrice;
     private ArrayList<String> bookIds;
