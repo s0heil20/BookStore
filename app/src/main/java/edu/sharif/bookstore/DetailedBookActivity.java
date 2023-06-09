@@ -103,7 +103,7 @@ public class DetailedBookActivity extends AppCompatActivity implements LoaderMan
             public void onClick(View v) {
                 String commentText = commentTextInput.getText().toString();
                 String userName = sqlDatabaseManager.getUserDatabaseManager().getLoggedInUser().getUsername();
-                int rating = (ratingBar.getNumStars());
+                int rating = (int)ratingBar.getRating();
                 Feedback feedback = new Feedback(userName, commentText, bookId, rating);
                 sqlDatabaseManager.getFeedbackDatabaseManager().addFeedback(feedback);
             }

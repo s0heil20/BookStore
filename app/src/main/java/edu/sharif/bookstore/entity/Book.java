@@ -113,9 +113,6 @@ public class Book {
         return avgRating;
     }
 
-    public void setAvgRating(int avgRating) {
-        this.avgRating = avgRating;
-    }
 
     public int getNumbersLeft() {
         return numbersLeft;

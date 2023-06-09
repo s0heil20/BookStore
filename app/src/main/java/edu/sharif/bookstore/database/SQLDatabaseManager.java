@@ -22,6 +22,7 @@ public class SQLDatabaseManager extends SQLiteOpenHelper {
     private final RatingDatabaseManager ratingDatabaseManager;
 
     private final StockDatabaseManager stockDatabaseManager;
+    private final PriceDatabaseManager priceDatabaseManager;
 
 
     public UserDatabaseManager getUserDatabaseManager() {
@@ -47,6 +48,7 @@ public class SQLDatabaseManager extends SQLiteOpenHelper {
     public StockDatabaseManager getStockDatabaseManager() {
         return stockDatabaseManager;
     }
+    public PriceDatabaseManager getPriceDatabaseManager() { return priceDatabaseManager; }
 
     public SQLDatabaseManager(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -57,6 +59,7 @@ public class SQLDatabaseManager extends SQLiteOpenHelper {
         cartDatabaseManager = CartDatabaseManager.instanceOfCartDatabaseManager(this);
         ratingDatabaseManager = RatingDatabaseManager.instanceOfRatingDatabaseManager(this);
         stockDatabaseManager = StockDatabaseManager.instanceOfStockDatabaseManager(this);
+        priceDatabaseManager = PriceDatabaseManager.instanceOfPriceDatabaseManager(this);
 
     }
 
@@ -75,6 +78,7 @@ public class SQLDatabaseManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(cartDatabaseManager.createTableString());
         sqLiteDatabase.execSQL(ratingDatabaseManager.createTableString());
         sqLiteDatabase.execSQL(stockDatabaseManager.createTableString());
+        sqLiteDatabase.execSQL(priceDatabaseManager.createTableString());
     }
 
 
@@ -86,6 +90,7 @@ public class SQLDatabaseManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + cartDatabaseManager.getTableName());
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ratingDatabaseManager.getTableName());
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + stockDatabaseManager.getTableName());
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + priceDatabaseManager.getTableName());
         onCreate(sqLiteDatabase);
     }
 

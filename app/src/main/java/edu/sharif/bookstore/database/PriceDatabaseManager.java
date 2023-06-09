@@ -49,7 +49,7 @@ public class PriceDatabaseManager implements EntityDatabaseManager {
 
     @Override
     public String getTableName() {
-        return null;
+        return TABLE_NAME;
     }
 
 

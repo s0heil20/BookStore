@@ -125,6 +125,7 @@ public class RatingDatabaseManager implements EntityDatabaseManager {
         SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
 
         Cursor row = getBookRow(bookId);
+        row.moveToFirst();
 
         if (row.getCount() == 0) {
             return 0;
@@ -138,7 +139,7 @@ public class RatingDatabaseManager implements EntityDatabaseManager {
         SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
 
         Cursor row = getBookRow(bookId);
-
+        row.moveToFirst();
         if (row.getCount() == 0) {
             return 0;
         } else {
