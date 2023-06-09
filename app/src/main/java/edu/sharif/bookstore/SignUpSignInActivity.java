@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.entity.User;
 
 public class SignUpSignInActivity extends AppCompatActivity {
@@ -54,22 +55,28 @@ public class SignUpSignInActivity extends AppCompatActivity {
         String username = usernameInput.getEditText().getText().toString();
 
         TextInputLayout passwordInput = findViewById(R.id.signUpPassword);
-        String password = usernameInput.getEditText().getText().toString();
+        String password = passwordInput.getEditText().getText().toString();
 
         TextInputLayout confirmPasswordInput = findViewById(R.id.signUpConfirmPassword);
-        String confirmPassword = usernameInput.getEditText().getText().toString();
+        String confirmPassword = confirmPasswordInput.getEditText().getText().toString();
 
         TextInputLayout nicknameInput = findViewById(R.id.signUpNickname);
-        String nickname = usernameInput.getEditText().getText().toString();
+        String nickname = nicknameInput.getEditText().getText().toString();
 
         boolean checkLengthResult = checkLength("username", username) && checkLength("password", username) && checkLength("confirmPassword", username) && checkLength("nickname", username);
         boolean checkConfirmPasswordResult = checkConfirmPassword(password, confirmPassword);
 
-//        checking username uniqueness
-
         if (checkLengthResult && checkConfirmPasswordResult) {
-//            using database here
-            viewFlipper.showNext();
+            User user = new User(username, password, nickname);
+            SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+            boolean doesUsernameExist = sqlDatabaseManager.getUserDatabaseManager().doesUsernameExists(user);
+
+            if (doesUsernameExist) {
+                Toast.makeText(this, "username already exists.", Toast.LENGTH_LONG).show();
+            } else {
+                sqlDatabaseManager.getUserDatabaseManager().signUpUser(user);
+                viewFlipper.showNext();
+            }
         }
     }
 
@@ -94,25 +101,34 @@ public class SignUpSignInActivity extends AppCompatActivity {
         String username = usernameInput.getEditText().getText().toString();
 
         TextInputLayout passwordInput = findViewById(R.id.signInPassword);
-        String password = usernameInput.getEditText().getText().toString();
+        String password = passwordInput.getEditText().getText().toString();
 
         CheckBox rememberInput = findViewById(R.id.signInRemember);
         boolean remember = rememberInput.isChecked();
 
-//        implement logic
+        User user = new User(username, password, "");
+        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+        user.setNickname(sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user));
+        if (sqlDatabaseManager.getUserDatabaseManager().checkPassword(user)) {
+            if (remember) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(SignUpSignInActivity.username, username);
+                editor.putString(SignUpSignInActivity.password, password);
+                editor.commit();
+            }
 
-        if (remember) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(SignUpSignInActivity.username, username);
-            editor.putString(SignUpSignInActivity.password, password);
-            editor.commit();
+            setLoggedInUser(user);
+            startActivity(new Intent(this, FakeActivity.class));
+        } else {
+            Toast.makeText(this, "incorrect password.", Toast.LENGTH_LONG).show();
         }
-
-        startActivity(new Intent(this, FakeActivity.class));
-
     }
 
     public static User getLoggedInUser() {
         return loggedInUser;
+    }
+
+    public static void setLoggedInUser(User loggedInUser) {
+        SignUpSignInActivity.loggedInUser = loggedInUser;
     }
 }

@@ -24,23 +24,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(this, FinalizeOrderActivity.class));
-
-
-
-        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
-        sqlDatabaseManager.dropTables();
-        sqlDatabaseManager.getRatingDatabaseManager().addRating(
-                "o", 90
-        );
-        sqlDatabaseManager.getRatingDatabaseManager().addRating(
-                "o", 9
-        );
-        sqlDatabaseManager.getRatingDatabaseManager().addRating(
-                "o", 19
-        );
-        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 8);
-        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 10);
+//        startActivity(new Intent(this, FinalizeOrderActivity.class));
+//
+//
+//
+//        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+//        sqlDatabaseManager.dropTables();
+//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
+//                "o", 90
+//        );
+//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
+//                "o", 9
+//        );
+//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
+//                "o", 19
+//        );
+//        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 8);
+//        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 10);
 //        sqlDatabaseManager.getRatingDatabaseManager().addRating(
 //                "t", 8
 //        );
