@@ -4,6 +4,8 @@ package edu.sharif.bookstore.database;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import edu.sharif.bookstore.entity.Feedback;
 
 public class FeedbackDatabaseManager implements EntityDatabaseManager{
@@ -64,6 +66,13 @@ public class FeedbackDatabaseManager implements EntityDatabaseManager{
         contentValues.put(RATING_FIELD, feedback.getRating());
 
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+
+        sqlDatabaseManager.getRatingDatabaseManager().addRating(feedback.getBookId(), feedback.getRating());
+    }
+
+
+    public ArrayList<Feedback> getBookFeedbacks(String bookId){
+        return null;
     }
 
 }

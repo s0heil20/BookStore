@@ -122,4 +122,12 @@ public class RatingDatabaseManager implements EntityDatabaseManager {
         Cursor result = sqLiteDatabase.rawQuery(sql.toString(), new String[]{bookId});
         return result;
     }
+
+    public float getAverageRating(String bookId){
+        return 0;
+    }
+
+    public int getTotalRatingNum(String bookId){
+        return 0;
+    }
 }

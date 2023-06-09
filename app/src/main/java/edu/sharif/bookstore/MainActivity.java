@@ -63,18 +63,18 @@ public class MainActivity extends AppCompatActivity {
 
 //        startActivity(new Intent(this, MainMenuActivity.class));
 
-        sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
-        if (sharedPreferences.contains(username)) {
-            String storedUsername = sharedPreferences.getString(username, "");
-            String storedPassword = sharedPreferences.getString(password, "");
-            SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
-            User user = new User(storedUsername, storedPassword, "");
-            String storedNickname = sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user);
-            user.setNickname(storedNickname);
-            sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
-            startActivity(new Intent(this, MainMenuActivity.class));
-        } else {
-            startActivity(new Intent(this, SignUpSignInActivity.class));
-        }
+//        sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
+//        if (sharedPreferences.contains(username)) {
+//            String storedUsername = sharedPreferences.getString(username, "");
+//            String storedPassword = sharedPreferences.getString(password, "");
+//            SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+//            User user = new User(storedUsername, storedPassword, "");
+//            String storedNickname = sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user);
+//            user.setNickname(storedNickname);
+//            sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
+//            startActivity(new Intent(this, MainMenuActivity.class));
+//        } else {
+//            startActivity(new Intent(this, SignUpSignInActivity.class));
+//        }
     }
 }

@@ -3,6 +3,10 @@ package edu.sharif.bookstore.database;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
+import edu.sharif.bookstore.entity.Cart;
+
 public class CartDatabaseManager implements EntityDatabaseManager{
 
     private static CartDatabaseManager cartDatabaseManager;
@@ -12,10 +16,17 @@ public class CartDatabaseManager implements EntityDatabaseManager{
     private static final String CART_ID_FIELD = "cart_id";
     private static final String BOOK_ID_FIELD = "book_id";
 
+    //TODO
+
+
+
     private SQLDatabaseManager sqlDatabaseManager;
+
+    private ArrayList<String> bookIds;
 
     public CartDatabaseManager(SQLDatabaseManager sqlDatabaseManager) {
         this.sqlDatabaseManager = sqlDatabaseManager;
+        bookIds = new ArrayList<>();
     }
 
     public static CartDatabaseManager instanceOfCartDatabaseManager(SQLDatabaseManager sqlDatabaseManager){
@@ -59,4 +70,24 @@ public class CartDatabaseManager implements EntityDatabaseManager{
 
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
+
+
+    public void addToCart(String bookId){
+        bookIds.add(bookId);
+    }
+
+    public void removeFromCart(String bookId){
+        bookIds.remove(bookId);
+    }
+
+    public void finalizeCart(String address, String date, int totalPrice){
+        //TODO
+    }
+
+
+    public  ArrayList<Cart> getUsersCarts(){
+        return null;
+    }
+
+
 }

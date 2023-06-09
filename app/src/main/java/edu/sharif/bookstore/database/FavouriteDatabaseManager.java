@@ -3,6 +3,10 @@ package edu.sharif.bookstore.database;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
+import edu.sharif.bookstore.entity.User;
+
 public class FavouriteDatabaseManager implements EntityDatabaseManager {
 
     private static FavouriteDatabaseManager favouriteDatabaseManager;
@@ -46,7 +50,10 @@ public class FavouriteDatabaseManager implements EntityDatabaseManager {
         return TABLE_NAME;
     }
 
-    public void addBookToFavourites(String username, String bookId) {
+    public void addBookToFavourites(String bookId) {
+        User loggedInUser = sqlDatabaseManager.getUserDatabaseManager().getLoggedInUser();
+        String username = loggedInUser.getUsername();
+
         SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -54,5 +61,13 @@ public class FavouriteDatabaseManager implements EntityDatabaseManager {
         contentValues.put(BOOK_ID_FIELD, bookId);
 
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+    }
+
+    public void removeFromFavourites(String bookId){
+
+    }
+
+    public ArrayList<String> getFavouriteBooks(){
+        return null;
     }
 }

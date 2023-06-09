@@ -88,6 +88,10 @@ public class StockDatabaseManager implements EntityDatabaseManager {
 
     }
 
+    public int getBookStock(String bookId){
+        return 0;
+    }
+
     private Cursor getBookRow(String bookId) {
         SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getReadableDatabase();
 
