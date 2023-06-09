@@ -12,11 +12,13 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 
 import edu.sharif.bookstore.cartHistory.CartHistoryActivity;
+import edu.sharif.bookstore.favourtie.FavouriteActivity;
 import edu.sharif.bookstore.mainMenu.MainMenuActivity;
 import edu.sharif.bookstore.profile.ProfileActivity;
 import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.search.SearchActivity;
 import edu.sharif.bookstore.settings.SettingsActivity;
+import edu.sharif.bookstore.shoppingCart.ShoppingCartActivity;
 
 public class NavBarActivity extends AppCompatActivity {
     @Override
@@ -41,10 +43,10 @@ public class NavBarActivity extends AppCompatActivity {
                         startActivity(new Intent(NavBarActivity.this, SearchActivity.class));
                         break;
                     case R.id.nav_cart:
-//                        startActivity(new Intent(NavBarActivity.this, CartActivity.class));
+                        startActivity(new Intent(NavBarActivity.this, ShoppingCartActivity.class));
                         break;
                     case R.id.nav_favorites:
-//                        startActivity(new Intent(NavBarActivity.this, FavouritesActivity.class));
+                        startActivity(new Intent(NavBarActivity.this, FavouriteActivity.class));
                         break;
                     case R.id.nav_cart_history:
                         startActivity(new Intent(NavBarActivity.this, CartHistoryActivity.class));
