@@ -25,56 +25,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(this, SearchActivity.class));
-
-
-
-//        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
-//        sqlDatabaseManager.dropTables();
-//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
-//                "o", 90
-//        );
-//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
-//                "o", 9
-//        );
-//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
-//                "o", 19
-//        );
-//        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 8);
-//        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 10);
-
-
-//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
-//                "t", 8
-//        );
-//        boolean res = sqlDatabaseManager.getUserDatabaseManager().signUpUser(
-//                new User("b", "b", "rouzbeh"));
-//        boolean res2 =sqlDatabaseManager.getUserDatabaseManager().signUpUser(
-//                new User("a", "a", "rouzbeh"));
-//        sqlDatabaseManager.getFeedbackDatabaseManager().addFeedback(
-//                new Feedback("a", "comment", "eee", 8));
-//
-//        Log.d("salammm", "onCreate: "+res + res2);
-
-//        startActivity(new Intent(this, DetailedBookActivity.class));
-//        startActivity(new Intent(this, SearchActivity.class));
-// startActivity(new Intent(this, MainMenuActivity.class));
-//        startActivity(new Intent(this, SearchActivity.class));
-
-//        startActivity(new Intent(this, MainMenuActivity.class));
-
-//        sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
-//        if (sharedPreferences.contains(username)) {
-//            String storedUsername = sharedPreferences.getString(username, "");
-//            String storedPassword = sharedPreferences.getString(password, "");
-//            SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
-//            User user = new User(storedUsername, storedPassword, "");
-//            String storedNickname = sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user);
-//            user.setNickname(storedNickname);
-//            sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
-//            startActivity(new Intent(this, MainMenuActivity.class));
-//        } else {
-//            startActivity(new Intent(this, SignUpSignInActivity.class));
-//        }
+        sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
+        if (sharedPreferences.contains(username)) {
+            String storedUsername = sharedPreferences.getString(username, "");
+            String storedPassword = sharedPreferences.getString(password, "");
+            SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+            User user = new User(storedUsername, storedPassword, "");
+            String storedNickname = sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user);
+            user.setNickname(storedNickname);
+            sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
+            startActivity(new Intent(this, MainMenuActivity.class));
+        } else {
+            startActivity(new Intent(this, SignUpSignInActivity.class));
+        }
     }
 }
