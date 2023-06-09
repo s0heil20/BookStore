@@ -64,7 +64,7 @@ public class MainMenuActivity extends AppCompatActivity implements LoaderManager
 
 
     @Override
-    public Loader<List<Book>> onCreateLoader(int id,Bundle args) {
+    public Loader<List<Book>> onCreateLoader(int id, Bundle args) {
         return new BookLoader(this, args.getString("queryString"), args.getString("queryType"));
     }
 

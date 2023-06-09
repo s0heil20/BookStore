@@ -20,7 +20,7 @@ public class BookLoader extends AsyncTaskLoader {
         this.queryString = queryString;
         this.queryType = queryType;
         this.sortingType = "relevance";
-        this.maxResult = "25";
+        this.maxResult = "10";
     }
 
     @Override

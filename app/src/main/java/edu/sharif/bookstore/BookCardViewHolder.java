@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class BookCardViewHolder extends RecyclerView.ViewHolder {
     TextView bookTitleTextView, publisherNameTextView, authorNameTextView, priceTextView;
-    ImageView deleteImageView;
+    ImageView deleteImageView, bookCardImageView;
 
     public BookCardViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -18,5 +18,6 @@ public class BookCardViewHolder extends RecyclerView.ViewHolder {
         authorNameTextView = itemView.findViewById(R.id.authorName);
         priceTextView = itemView.findViewById(R.id.price);
         deleteImageView = itemView.findViewById(R.id.deleteImageView);
+        bookCardImageView = itemView.findViewById(R.id.bookCardImageView);
     }
 }

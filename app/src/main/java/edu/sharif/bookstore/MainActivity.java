@@ -24,23 +24,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(this, FinalizeOrderActivity.class));
+        startActivity(new Intent(this, SearchActivity.class));
 
 
 
-        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
-        sqlDatabaseManager.dropTables();
-        sqlDatabaseManager.getRatingDatabaseManager().addRating(
-                "o", 90
-        );
-        sqlDatabaseManager.getRatingDatabaseManager().addRating(
-                "o", 9
-        );
-        sqlDatabaseManager.getRatingDatabaseManager().addRating(
-                "o", 19
-        );
-        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 8);
-        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 10);
+//        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+//        sqlDatabaseManager.dropTables();
+//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
+//                "o", 90
+//        );
+//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
+//                "o", 9
+//        );
+//        sqlDatabaseManager.getRatingDatabaseManager().addRating(
+//                "o", 19
+//        );
+//        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 8);
+//        sqlDatabaseManager.getStockDatabaseManager().reduceStock("a", 10);
+
+
 //        sqlDatabaseManager.getRatingDatabaseManager().addRating(
 //                "t", 8
 //        );
@@ -59,11 +61,13 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(new Intent(this, SearchActivity.class));
 
 //        startActivity(new Intent(this, MainMenuActivity.class));
-        sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
-        if (sharedPreferences.contains(username)) {
-            startActivity(new Intent(this, FakeActivity.class));
-        } else {
-            startActivity(new Intent(this, SignUpSignInActivity.class));
-        }
+
+
+//        sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
+//        if (sharedPreferences.contains(username)) {
+//            startActivity(new Intent(this, FakeActivity.class));
+//        } else {
+//            startActivity(new Intent(this, SignUpSignInActivity.class));
+//        }
     }
 }

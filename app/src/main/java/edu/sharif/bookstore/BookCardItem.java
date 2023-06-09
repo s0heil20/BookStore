@@ -1,13 +1,18 @@
 package edu.sharif.bookstore;
 
+import android.graphics.drawable.Drawable;
+
 public class BookCardItem {
     private String bookTitle, publisherName, authorName, price;
 
-    public BookCardItem(String bookTitle, String publisherName, String authorName, String price) {
+    private Drawable bookCardImage;
+
+    public BookCardItem(String bookTitle, String publisherName, String authorName, String price, Drawable bookCardImage) {
         this.bookTitle = bookTitle;
         this.publisherName = publisherName;
         this.authorName = authorName;
         this.price = price;
+        this.bookCardImage = bookCardImage;
     }
 
     public String getBookTitle() {
@@ -26,6 +31,9 @@ public class BookCardItem {
         return price;
     }
 
+    public Drawable getBookCardImage() {
+        return bookCardImage;
+    }
 
     public void setBookTitle(String bookTitle) {
         this.bookTitle = bookTitle;
@@ -43,4 +51,7 @@ public class BookCardItem {
         this.price = price;
     }
 
+    public void setBookCardImage(Drawable bookCardImage) {
+        this.bookCardImage = bookCardImage;
+    }
 }

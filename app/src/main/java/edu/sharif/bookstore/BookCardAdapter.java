@@ -36,6 +36,7 @@ public class BookCardAdapter extends RecyclerView.Adapter<BookCardViewHolder> {
         holder.publisherNameTextView.setText(items.get(position).getPublisherName());
         holder.authorNameTextView.setText(items.get(position).getAuthorName());
         holder.priceTextView.setText(items.get(position).getPrice());
+        holder.bookCardImageView.setImageDrawable(items.get(position).getBookCardImage());
         if (isDeleteVisible) {
             holder.deleteImageView.setVisibility(View.VISIBLE);
             holder.deleteImageView.setOnClickListener(new View.OnClickListener() {

@@ -18,12 +18,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        items = new ArrayList<>();
-        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
-        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
-        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
-        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
-        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
+//        items = new ArrayList<>();
+//        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
+//        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
+//        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
+//        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
+//        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
 
 
 //        recyclerView = findViewById(R.id.searchRecyclerView);
