@@ -41,7 +41,7 @@ public class SignUpSignInActivity extends AppCompatActivity {
             String storedNickname = sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user);
             user.setNickname(storedNickname);
             sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
-            startActivity(new Intent(this, FakeActivity.class));
+            startActivity(new Intent(this, MainMenuActivity.class));
         }
 
         viewFlipper = findViewById(R.id.viewFlipper);
@@ -125,7 +125,7 @@ public class SignUpSignInActivity extends AppCompatActivity {
                 }
 
                 sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
-                startActivity(new Intent(this, FakeActivity.class));
+                startActivity(new Intent(this, MainMenuActivity.class));
             } else {
                 Toast.makeText(this, "incorrect password.", Toast.LENGTH_LONG).show();
             }

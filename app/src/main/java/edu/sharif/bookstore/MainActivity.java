@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             String storedNickname = sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user);
             user.setNickname(storedNickname);
             sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
-            startActivity(new Intent(this, FakeActivity.class));
+            startActivity(new Intent(this, MainMenuActivity.class));
         } else {
             startActivity(new Intent(this, SignUpSignInActivity.class));
         }
