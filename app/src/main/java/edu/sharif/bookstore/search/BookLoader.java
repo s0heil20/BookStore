@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.search;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package edu.sharif.bookstore.utils;
+package edu.sharif.bookstore.navigationBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,19 +7,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-import edu.sharif.bookstore.CartHistoryActivity;
-import edu.sharif.bookstore.MainMenuActivity;
-import edu.sharif.bookstore.ProfileActivity;
+import edu.sharif.bookstore.cartHistory.CartHistoryActivity;
+import edu.sharif.bookstore.mainMenu.MainMenuActivity;
+import edu.sharif.bookstore.profile.ProfileActivity;
 import edu.sharif.bookstore.R;
-import edu.sharif.bookstore.SearchActivity;
-import edu.sharif.bookstore.SettingsActivity;
+import edu.sharif.bookstore.search.SearchActivity;
+import edu.sharif.bookstore.settings.SettingsActivity;
 
 public class NavBarActivity extends AppCompatActivity {
     @Override

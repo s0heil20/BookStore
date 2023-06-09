@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.search;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,8 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.sharif.bookstore.bookCard.BookCardAdapter;
+import edu.sharif.bookstore.bookCard.BookCardItem;
+import edu.sharif.bookstore.navigationBar.NavBarActivity;
+import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.entity.Book;
-import edu.sharif.bookstore.utils.NavBarActivity;
 
 public class SearchActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<List<Book>> {
     RecyclerView recyclerView;

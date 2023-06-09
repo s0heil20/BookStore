@@ -1,11 +1,10 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.finalizeOrder;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,11 +14,10 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import org.w3c.dom.Text;
-
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
 
 public class FinalizeOrderActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {

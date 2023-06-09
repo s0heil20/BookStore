@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.navigationBar;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.databinding.ActivityBaseBinding;
 
 public class BaseActivity extends AppCompatActivity {

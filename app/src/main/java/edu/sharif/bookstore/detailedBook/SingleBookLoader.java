@@ -1,14 +1,10 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.detailedBook;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
 import org.json.JSONException;
-
-import java.util.List;
 
 import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.entity.Book;

@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.cartHistory;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.entity.Book;
 import edu.sharif.bookstore.entity.Cart;
 

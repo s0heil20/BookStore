@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.mainMenu;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import edu.sharif.bookstore.R;
 
 public class MainMenuViewHolder extends RecyclerView.ViewHolder {
 

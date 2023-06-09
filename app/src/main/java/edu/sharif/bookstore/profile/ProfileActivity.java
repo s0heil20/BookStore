@@ -1,6 +1,4 @@
-package edu.sharif.bookstore;
-
-import androidx.appcompat.app.AppCompatActivity;
+package edu.sharif.bookstore.profile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +10,11 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import edu.sharif.bookstore.navigationBar.NavBarActivity;
+import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.entity.User;
-import edu.sharif.bookstore.utils.NavBarActivity;
+import edu.sharif.bookstore.signUpSignIn.SignUpSignInActivity;
 
 public class ProfileActivity extends NavBarActivity {
     private static final String fileName = "login";

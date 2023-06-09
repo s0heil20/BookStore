@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.bookCard;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import edu.sharif.bookstore.R;
 
 public class BookCardAdapter extends RecyclerView.Adapter<BookCardViewHolder> {
     private LayoutInflater layoutInflater;

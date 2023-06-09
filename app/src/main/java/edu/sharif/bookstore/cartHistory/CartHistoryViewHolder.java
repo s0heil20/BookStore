@@ -1,10 +1,12 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.cartHistory;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import edu.sharif.bookstore.R;
 
 public class CartHistoryViewHolder extends RecyclerView.ViewHolder {
     public TextView dateTV, addressTV, booksTV, totalPriceTV;

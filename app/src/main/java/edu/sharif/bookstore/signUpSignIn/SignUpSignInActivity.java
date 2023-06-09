@@ -1,10 +1,9 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.signUpSignIn;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -14,8 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import edu.sharif.bookstore.mainMenu.MainMenuActivity;
+import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
-import edu.sharif.bookstore.database.UserDatabaseManager;
 import edu.sharif.bookstore.entity.User;
 
 public class SignUpSignInActivity extends AppCompatActivity {

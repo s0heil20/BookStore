@@ -6,12 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
+import edu.sharif.bookstore.mainMenu.MainMenuActivity;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
-import edu.sharif.bookstore.database.UserDatabaseManager;
-import edu.sharif.bookstore.entity.Feedback;
 import edu.sharif.bookstore.entity.User;
+import edu.sharif.bookstore.signUpSignIn.SignUpSignInActivity;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;

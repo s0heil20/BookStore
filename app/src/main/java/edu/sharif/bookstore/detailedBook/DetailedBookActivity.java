@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.detailedBook;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,18 +9,16 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
+import edu.sharif.bookstore.finalizeOrder.FinalizeOrderActivity;
+import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.entity.Book;
 import edu.sharif.bookstore.entity.Feedback;

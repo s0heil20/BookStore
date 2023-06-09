@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.cartHistory;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
-import edu.sharif.bookstore.entity.Book;
 import edu.sharif.bookstore.entity.Cart;
-import edu.sharif.bookstore.utils.NavBarActivity;
+import edu.sharif.bookstore.navigationBar.NavBarActivity;
 
 public class CartHistoryActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<ArrayList<Cart>> {
 

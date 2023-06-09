@@ -1,6 +1,4 @@
-package edu.sharif.bookstore;
-
-import androidx.appcompat.app.AppCompatActivity;
+package edu.sharif.bookstore.settings;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +7,8 @@ import android.widget.TextView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
-import edu.sharif.bookstore.utils.NavBarActivity;
+import edu.sharif.bookstore.navigationBar.NavBarActivity;
+import edu.sharif.bookstore.R;
 
 public class SettingsActivity extends NavBarActivity {
     private SwitchMaterial switchMaterial;

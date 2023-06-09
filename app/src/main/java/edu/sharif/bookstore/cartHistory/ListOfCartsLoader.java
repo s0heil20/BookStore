@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.cartHistory;
 
 import android.content.Context;
 
@@ -7,7 +7,6 @@ import androidx.loader.content.AsyncTaskLoader;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.entity.Book;

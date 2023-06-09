@@ -1,4 +1,4 @@
-package edu.sharif.bookstore;
+package edu.sharif.bookstore.bookCard;
 
 import android.graphics.drawable.Drawable;
 
