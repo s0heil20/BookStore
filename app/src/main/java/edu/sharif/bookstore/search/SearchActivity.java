@@ -1,5 +1,6 @@
 package edu.sharif.bookstore.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,14 +22,16 @@ import java.util.List;
 
 import edu.sharif.bookstore.bookCard.BookCardAdapter;
 import edu.sharif.bookstore.bookCard.BookCardItem;
+import edu.sharif.bookstore.bookCard.SelectBookCardListener;
+import edu.sharif.bookstore.detailedBook.DetailedBookActivity;
 import edu.sharif.bookstore.navigationBar.NavBarActivity;
 import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.entity.Book;
 
-public class SearchActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<List<Book>> {
-    RecyclerView recyclerView;
-    BookCardAdapter adapter;
-    ArrayList<BookCardItem> items;
+public class SearchActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<List<Book>>, SelectBookCardListener {
+    private RecyclerView recyclerView;
+    private BookCardAdapter adapter;
+//    ArrayList<BookCardItem> items;
 
 
     String[] dropdownItems = {"Title", "Publisher Name", "Author Name"};
@@ -70,7 +73,6 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
         recyclerView = findViewById(R.id.searchRecyclerView);
 
 
-
         searchView = findViewById(R.id.searchBar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -90,7 +92,7 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
     }
 
 
-    private void getQueryResult(String queryString, String queryType){
+    private void getQueryResult(String queryString, String queryType) {
         Bundle queryBundle = new Bundle();
         queryBundle.putString("queryString", queryString);
         queryBundle.putString("queryType", queryType);
@@ -101,10 +103,10 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
         List<BookCardItem> items = new ArrayList<BookCardItem>();
         for (Book book : books) {
             items.add(new BookCardItem(book.getTitle(), book.getPublisher(), book.getAuthors().get(0),
-                    String.valueOf(book.getPrice()), book.getImage()));
+                    String.valueOf(book.getPrice()), book.getBookId(), book.getImage()));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new BookCardAdapter(this, items, true);
+        adapter = new BookCardAdapter(this, items, true, this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -123,6 +125,12 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<Book>> loader) {
+
+    }
+
+    @Override
+    public void onItemClicked(BookCardItem bookCardItem) {
+        startActivity(new Intent(this, DetailedBookActivity.class).putExtra("bookId", bookCardItem.getBookId()));
 
     }
 }

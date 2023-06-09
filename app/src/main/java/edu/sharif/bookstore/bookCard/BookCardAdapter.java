@@ -18,11 +18,14 @@ public class BookCardAdapter extends RecyclerView.Adapter<BookCardViewHolder> {
     private List<BookCardItem> items;
     private Boolean isDeleteVisible;
 
+    private SelectBookCardListener selectBookCardListener;
 
-    public BookCardAdapter(Context context, List<BookCardItem> items, Boolean isDeleteVisible) {
+
+    public BookCardAdapter(Context context, List<BookCardItem> items, Boolean isDeleteVisible, SelectBookCardListener selectBookCardListener) {
         this.layoutInflater = LayoutInflater.from(context);
         this.items = items;
         this.isDeleteVisible = isDeleteVisible;
+        this.selectBookCardListener = selectBookCardListener;
     }
 
     @NonNull
@@ -48,6 +51,13 @@ public class BookCardAdapter extends RecyclerView.Adapter<BookCardViewHolder> {
                 }
             });
         }
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectBookCardListener.onItemClicked(items.get(position));
+            }
+        });
     }
 
     @Override

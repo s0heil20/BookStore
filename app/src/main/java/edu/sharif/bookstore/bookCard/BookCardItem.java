@@ -3,15 +3,16 @@ package edu.sharif.bookstore.bookCard;
 import android.graphics.drawable.Drawable;
 
 public class BookCardItem {
-    private String bookTitle, publisherName, authorName, price;
+    private String bookTitle, publisherName, authorName, price, bookId;
 
     private Drawable bookCardImage;
 
-    public BookCardItem(String bookTitle, String publisherName, String authorName, String price, Drawable bookCardImage) {
+    public BookCardItem(String bookTitle, String publisherName, String authorName, String price, String bookId, Drawable bookCardImage) {
         this.bookTitle = bookTitle;
         this.publisherName = publisherName;
         this.authorName = authorName;
         this.price = price;
+        this.bookId = bookId;
         this.bookCardImage = bookCardImage;
     }
 
@@ -35,6 +36,10 @@ public class BookCardItem {
         return bookCardImage;
     }
 
+    public String getBookId() {
+        return bookId;
+    }
+
     public void setBookTitle(String bookTitle) {
         this.bookTitle = bookTitle;
     }
@@ -53,5 +58,9 @@ public class BookCardItem {
 
     public void setBookCardImage(Drawable bookCardImage) {
         this.bookCardImage = bookCardImage;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
 }
