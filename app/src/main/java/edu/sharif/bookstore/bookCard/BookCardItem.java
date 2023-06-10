@@ -12,8 +12,10 @@ public class BookCardItem {
 
     private float rating;
 
+    private boolean isFavourite;
+
     public BookCardItem(List<String> authorNames, String bookTitle, String publisherName,
-                        String price, String bookId, Drawable bookCardImage, float rating) {
+                        String price, String bookId, Drawable bookCardImage, float rating, boolean isFavourite) {
         this.authorNames = authorNames;
         this.bookTitle = bookTitle;
         this.publisherName = publisherName;
@@ -21,6 +23,7 @@ public class BookCardItem {
         this.bookId = bookId;
         this.bookCardImage = bookCardImage;
         this.rating = rating;
+        this.isFavourite = isFavourite;
     }
 
     public String getBookTitle() {
@@ -32,6 +35,8 @@ public class BookCardItem {
     }
 
     public String getAuthorNames() {
+        if (authorNames.size() == 0)
+            return "";
         StringBuilder result = new StringBuilder();
         for (String authorName : authorNames) {
             result.append(authorName).append(", ");
@@ -53,6 +58,10 @@ public class BookCardItem {
 
     public String getBookId() {
         return bookId;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
     }
 
     public void setBookTitle(String bookTitle) {

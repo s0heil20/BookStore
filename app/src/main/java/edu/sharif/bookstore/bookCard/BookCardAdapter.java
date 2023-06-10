@@ -47,6 +47,11 @@ public class BookCardAdapter extends RecyclerView.Adapter<BookCardViewHolder> {
         holder.priceTextView.setText(items.get(position).getPrice());
         holder.bookCardImageView.setImageDrawable(items.get(position).getBookCardImage());
         holder.ratingBar.setRating(items.get(position).getRating());
+        if (items.get(position).isFavourite()){
+            holder.favouriteImageView.setVisibility(View.VISIBLE);
+        }else {
+            holder.favouriteImageView.setVisibility(View.INVISIBLE);
+        }
 
         if (isDeleteVisible) {
             holder.deleteImageView.setVisibility(View.VISIBLE);

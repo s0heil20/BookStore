@@ -22,4 +22,8 @@
     <string name="rateThisBook"> Rate this book: </string>
     <string name="totalPrice">Total Price</string>
     <string name="enterDateHere">Choose Date</string>
+
+    <string name="favouriteEmptyResultMessage">Add books to your favourites to view them here!</string>
+    <string name="searchEmptyResultMessage">Unable to find any results. Try searching with different words.</string>
+    <string name="shoppingCartEmptyResultMessage">Your cart is empty!</string>
 </resources>

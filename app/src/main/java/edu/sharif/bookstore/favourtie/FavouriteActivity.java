@@ -3,6 +3,7 @@ package edu.sharif.bookstore.favourtie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,8 @@ public class FavouriteActivity extends NavBarActivity implements LoaderManager.L
     RecyclerView recyclerView;
     BookCardAdapter adapter;
 
+    TextView emptyResultMessage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pageName = "Favorites";
@@ -38,6 +41,7 @@ public class FavouriteActivity extends NavBarActivity implements LoaderManager.L
 
         recyclerView = findViewById(R.id.favouriteRecyclerView);
 
+        emptyResultMessage = findViewById(R.id.favouriteEmptyResultMessage);
     }
 
     @Override
@@ -48,10 +52,18 @@ public class FavouriteActivity extends NavBarActivity implements LoaderManager.L
     }
 
     private void addBookItemsToRecyclerView(List<Book> books) {
+        if (books.size() == 0){
+            emptyResultMessage.setVisibility(View.VISIBLE);
+        }else {
+            emptyResultMessage.setVisibility(View.INVISIBLE);
+        }
+        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+        ArrayList<String> favouriteBooks = sqlDatabaseManager.getFavouriteDatabaseManager().getFavouriteBooks();
+
         List<BookCardItem> items = new ArrayList<BookCardItem>();
         for (Book book : books) {
             items.add(new BookCardItem(book.getAuthors(), book.getTitle(), book.getPublisher(),
-                    String.valueOf(book.getPrice()), book.getBookId(), book.getImage(), book.getAvgRating()));
+                    String.valueOf(book.getPrice()), book.getBookId(), book.getImage(), book.getAvgRating(),  favouriteBooks.contains(book.getBookId())));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BookCardAdapter(this, items, false, this);
