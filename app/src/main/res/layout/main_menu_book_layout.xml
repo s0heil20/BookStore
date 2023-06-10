@@ -43,7 +43,6 @@
         android:layout_toEndOf="@id/bookImageViewLayOut"
         android:text="TextView"
         android:textSize="15dp"
-        android:fontFamily="@font/univanova_bold"
         android:layout_marginTop="10dp"
         />
 
