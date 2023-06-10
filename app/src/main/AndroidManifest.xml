@@ -49,6 +49,7 @@
         <activity android:name=".mainMenu.MainMenuActivity" />
         <activity android:name=".detailedBook.DetailedBookActivity" />
         <activity android:name=".finalizeOrder.FinalizeOrderActivity" />
+        <activity android:name=".favourtie.FavouriteActivity" />
     </application>
 
 </manifest>

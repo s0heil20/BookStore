@@ -112,7 +112,7 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
                     String.valueOf(book.getPrice()), book.getBookId(), book.getImage()));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new BookCardAdapter(this, items, true, this);
+        adapter = new BookCardAdapter(this, items, false, this);
         recyclerView.setAdapter(adapter);
     }
 
