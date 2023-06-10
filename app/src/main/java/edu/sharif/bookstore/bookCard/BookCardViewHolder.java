@@ -13,7 +13,7 @@ import edu.sharif.bookstore.R;
 
 public class BookCardViewHolder extends RecyclerView.ViewHolder {
     TextView bookTitleTextView, publisherNameTextView, authorNameTextView, priceTextView;
-    ImageView deleteImageView, bookCardImageView;
+    ImageView deleteImageView, bookCardImageView, favouriteImageView;
 
     CardView cardView;
 
@@ -29,5 +29,6 @@ public class BookCardViewHolder extends RecyclerView.ViewHolder {
         bookCardImageView = itemView.findViewById(R.id.bookCardImageView);
         cardView = itemView.findViewById(R.id.bookCardView);
         ratingBar = itemView.findViewById(R.id.cardRatingBar);
+        favouriteImageView = itemView.findViewById(R.id.favouriteImageView);
     }
 }

@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import java.util.List;
 import edu.sharif.bookstore.bookCard.BookCardAdapter;
 import edu.sharif.bookstore.bookCard.BookCardItem;
 import edu.sharif.bookstore.bookCard.SelectBookCardListener;
+import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.detailedBook.DetailedBookActivity;
 import edu.sharif.bookstore.navigationBar.NavBarActivity;
 import edu.sharif.bookstore.R;
@@ -31,7 +33,7 @@ import edu.sharif.bookstore.entity.Book;
 public class SearchActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<List<Book>>, SelectBookCardListener {
     private RecyclerView recyclerView;
     private BookCardAdapter adapter;
-//    ArrayList<BookCardItem> items;
+    private TextView emptyResultMessage;
 
 
     String[] dropdownItems = {"Title", "Publisher Name", "Author Name"};
@@ -63,7 +65,7 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
 
                 String item = adapterView.getItemAtPosition(i).toString();
                 queryType = "in" + item;
-                if (!queryString.equals("")) {
+                if (queryString != null) {
                     getQueryResult(queryString, queryType);
                 }
             }
@@ -71,6 +73,8 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
 
 
         recyclerView = findViewById(R.id.searchRecyclerView);
+
+        emptyResultMessage = findViewById(R.id.searchEmptyResultMessage);
 
 
         searchView = findViewById(R.id.searchBar);
@@ -100,10 +104,18 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
     }
 
     private void addBookItemsToRecyclerView(List<Book> books) {
+        if (books.size() == 0) {
+            emptyResultMessage.setVisibility(View.VISIBLE);
+        } else {
+            emptyResultMessage.setVisibility(View.INVISIBLE);
+        }
+        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+        ArrayList<String> favouriteBooks = sqlDatabaseManager.getFavouriteDatabaseManager().getFavouriteBooks();
+
         List<BookCardItem> items = new ArrayList<BookCardItem>();
         for (Book book : books) {
             items.add(new BookCardItem(book.getAuthors(), book.getTitle(), book.getPublisher(),
-                    String.valueOf(book.getPrice()), book.getBookId(), book.getImage(), book.getAvgRating()));
+                    String.valueOf(book.getPrice()), book.getBookId(), book.getImage(), book.getAvgRating(), favouriteBooks.contains(book.getBookId())));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BookCardAdapter(this, items, false, this);
@@ -118,9 +130,7 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Book>> loader, List<Book> books) {
-        if (books.size() > 0) {
-            addBookItemsToRecyclerView(books);
-        }
+        addBookItemsToRecyclerView(books);
     }
 
     @Override

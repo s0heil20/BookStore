@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,8 @@ public class ShoppingCartActivity extends NavBarActivity implements LoaderManage
 
     Button purchaseButton;
 
+    TextView emptyResultMessage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pageName = "Shopping Cart";
@@ -44,6 +47,8 @@ public class ShoppingCartActivity extends NavBarActivity implements LoaderManage
         recyclerView = findViewById(R.id.shoppingCartRecyclerView);
 
         purchaseButton = findViewById(R.id.purchaseButton);
+
+        emptyResultMessage = findViewById(R.id.shoppingCartEmptyResultMessage);
 
         purchaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,10 +65,18 @@ public class ShoppingCartActivity extends NavBarActivity implements LoaderManage
     }
 
     private void addBookItemsToRecyclerView(List<Book> books) {
+        if (books.size() == 0) {
+            emptyResultMessage.setVisibility(View.VISIBLE);
+        } else {
+            emptyResultMessage.setVisibility(View.INVISIBLE);
+        }
+        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+        ArrayList<String> favouriteBooks = sqlDatabaseManager.getFavouriteDatabaseManager().getFavouriteBooks();
+
         List<BookCardItem> items = new ArrayList<BookCardItem>();
         for (Book book : books) {
             items.add(new BookCardItem(book.getAuthors(), book.getTitle(), book.getPublisher(),
-                    String.valueOf(book.getPrice()), book.getBookId(), book.getImage(), book.getAvgRating()));
+                    String.valueOf(book.getPrice()), book.getBookId(), book.getImage(), book.getAvgRating(),  favouriteBooks.contains(book.getBookId())));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BookCardAdapter(this, items, true, this);

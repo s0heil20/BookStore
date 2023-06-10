@@ -43,7 +43,10 @@ public class ProfileActivity extends NavBarActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.commit();
-        startActivity(new Intent(this, SignUpSignInActivity.class));
+
+        Intent intent = new Intent(this, SignUpSignInActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     public void deleteAccount(View view) {
