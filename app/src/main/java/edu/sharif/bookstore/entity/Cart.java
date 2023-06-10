@@ -42,4 +42,8 @@ public class Cart implements Serializable {
     public int getTotalPrice() {
         return totalPrice;
     }
+
+    public void emptyBooks() {
+        this.books = new ArrayList<Book>();
+    }
 }

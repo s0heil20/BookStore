@@ -31,6 +31,7 @@ public class FavouriteActivity extends NavBarActivity implements LoaderManager.L
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pageName = "Favorites";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_favourite);
         handleParentView(R.layout.nav_favourite);

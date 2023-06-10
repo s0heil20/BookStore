@@ -28,6 +28,7 @@ public class ListOfCartsLoader extends AsyncTaskLoader {
     @Override
     public ArrayList<Cart> loadInBackground() {
         for (Cart cart : this.carts) {
+            cart.emptyBooks();
             for (String bookId : cart.getBookIds()) {
                 String bookJson = NetworkUtils.getBookJsonStringById(bookId);
                 if (bookJson != null) {

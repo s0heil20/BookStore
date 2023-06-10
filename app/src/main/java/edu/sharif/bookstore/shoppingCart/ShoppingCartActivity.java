@@ -36,6 +36,7 @@ public class ShoppingCartActivity extends NavBarActivity implements LoaderManage
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pageName = "Shopping Cart";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_shopping_cart);
         handleParentView(R.layout.nav_shopping_cart);

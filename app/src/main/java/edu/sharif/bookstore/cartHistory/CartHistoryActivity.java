@@ -22,16 +22,14 @@ public class CartHistoryActivity extends NavBarActivity implements LoaderManager
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pageName = "Cart History";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_cart_history);
         handleParentView(R.layout.nav_cart_history);
 
         recyclerView = findViewById(R.id.cartListRecyclerView);
 
-        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
-        Bundle initialBundle = new Bundle();
-        initialBundle.putSerializable("carts", sqlDatabaseManager.getCartDatabaseManager().getUsersCarts());
-        getSupportLoaderManager().restartLoader(0, initialBundle, this);
+        getSupportLoaderManager().restartLoader(0, null, this);
     }
 
     public void addCartsToRecyclerView(ArrayList<Cart> carts) {
@@ -42,7 +40,8 @@ public class CartHistoryActivity extends NavBarActivity implements LoaderManager
     @NonNull
     @Override
     public Loader<ArrayList<Cart>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new ListOfCartsLoader(this, (ArrayList<Cart>) args.getSerializable("carts"));
+        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+        return new ListOfCartsLoader(this, sqlDatabaseManager.getCartDatabaseManager().getUsersCarts());
     }
 
     @Override

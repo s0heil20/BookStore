@@ -23,6 +23,7 @@ public class ProfileActivity extends NavBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pageName = "Profile";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_profile);
         handleParentView(R.layout.nav_profile);

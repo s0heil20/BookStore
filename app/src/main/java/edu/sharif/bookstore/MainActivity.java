@@ -1,6 +1,7 @@
 package edu.sharif.bookstore;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import edu.sharif.bookstore.mainMenu.MainMenuActivity;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.entity.User;
+import edu.sharif.bookstore.navigationBar.NavBarActivity;
 import edu.sharif.bookstore.signUpSignIn.SignUpSignInActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState == null) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            getDelegate().applyDayNight();
+        }
+
         sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(username)) {
             String storedUsername = sharedPreferences.getString(username, "");
@@ -33,9 +40,15 @@ public class MainActivity extends AppCompatActivity {
             String storedNickname = sqlDatabaseManager.getUserDatabaseManager().getUserNickname(user);
             user.setNickname(storedNickname);
             sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
-            startActivity(new Intent(this, MainMenuActivity.class));
+
+            Intent intent = new Intent(this, MainMenuActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         } else {
-            startActivity(new Intent(this, SignUpSignInActivity.class));
+            Intent intent = new Intent(this, SignUpSignInActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
     }
+
 }

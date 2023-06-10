@@ -44,6 +44,7 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pageName = "Search";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_search);
         handleParentView(R.layout.nav_search);
