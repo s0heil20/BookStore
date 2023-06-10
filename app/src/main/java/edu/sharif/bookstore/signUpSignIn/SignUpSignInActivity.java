@@ -125,7 +125,10 @@ public class SignUpSignInActivity extends AppCompatActivity {
                 }
 
                 sqlDatabaseManager.getUserDatabaseManager().setLoggedInUser(user);
-                startActivity(new Intent(this, MainMenuActivity.class));
+
+                Intent intent = new Intent(this, MainMenuActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "incorrect password.", Toast.LENGTH_LONG).show();
             }
