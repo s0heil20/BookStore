@@ -1,6 +1,7 @@
 package edu.sharif.bookstore.finalizeOrder;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,9 @@ import java.util.Calendar;
 import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.exception.OrderException;
+import edu.sharif.bookstore.mainMenu.MainMenuActivity;
 import edu.sharif.bookstore.navigationBar.NavBarActivity;
+import edu.sharif.bookstore.signUpSignIn.SignUpSignInActivity;
 
 public class FinalizeOrderActivity extends NavBarActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -66,6 +69,10 @@ public class FinalizeOrderActivity extends NavBarActivity implements DatePickerD
                 String date = dateTextView.getText().toString();
                 try {
                     sqlDatabaseManager.getCartDatabaseManager().finalizeCart(address, date, totalPrice);
+                    Toast.makeText(getBaseContext(), "Successful!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getBaseContext(), MainMenuActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 } catch (OrderException e) {
                     Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
