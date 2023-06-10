@@ -1,5 +1,6 @@
 package edu.sharif.bookstore.utils;
 
+import android.text.Html;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -77,6 +78,9 @@ public class BookJsonParserUtil {
              String description = "DEFAULT DESCRIPTION!";
              if (volumeInfo.has("description")){
                  description = volumeInfo.getString("description");
+                 description = Html.fromHtml(description).toString();
+                 //description.replaceAll("<.*?>" , " ");
+                 //description.replaceAll("&.*?;", "");
              }
              String category = "DEFAULT CATEGORY";
              if (volumeInfo.has("categories")) {
