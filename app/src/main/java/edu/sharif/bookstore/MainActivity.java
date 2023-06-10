@@ -15,21 +15,23 @@ import edu.sharif.bookstore.navigationBar.NavBarActivity;
 import edu.sharif.bookstore.signUpSignIn.SignUpSignInActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private SharedPreferences sharedPreferences;
 
     private static final String fileName = "login";
     private static final String username = "username";
     private static final String password = "password";
+
+    private int NightMode;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-            getDelegate().applyDayNight();
-        }
+        sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
+        NightMode = sharedPreferences.getInt("NightModeInt", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        AppCompatDelegate.setDefaultNightMode(NightMode);
+        getDelegate().applyDayNight();
 
         sharedPreferences = getSharedPreferences(fileName, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(username)) {
