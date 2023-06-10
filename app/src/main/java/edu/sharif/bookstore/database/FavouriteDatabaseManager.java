@@ -69,7 +69,7 @@ public class FavouriteDatabaseManager implements EntityDatabaseManager {
         User loggedInUser = sqlDatabaseManager.getUserDatabaseManager().getLoggedInUser();
 
         SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
-        sqLiteDatabase.delete(TABLE_NAME, BOOK_ID_FIELD + "=?, " + USER_NAME_FIELD + "=? ",
+        sqLiteDatabase.delete(TABLE_NAME, BOOK_ID_FIELD + "=? AND " + USER_NAME_FIELD + "=? ",
                 new String[]{bookId, loggedInUser.getUsername()});
         sqLiteDatabase.close();
     }
@@ -109,7 +109,7 @@ public class FavouriteDatabaseManager implements EntityDatabaseManager {
                 .append(TABLE_NAME)
                 .append(" WHERE ")
                 .append(USER_NAME_FIELD)
-                .append(" = ? ,")
+                .append(" = ? AND ")
                 .append(BOOK_ID_FIELD)
                 .append(" = ? ");
 

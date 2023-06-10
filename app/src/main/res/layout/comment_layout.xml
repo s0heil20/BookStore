@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="5dp"
+        android:orientation="vertical"
+        android:background="@drawable/border_background">
 
     <TextView
         android:id="@+id/userIdComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
+        android:textSize="15dp"
+        android:fontFamily="@font/univanova_bold"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/ratingComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
+        android:textSize="12dp"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/descriptionComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
+        android:textSize="12dp"
         android:text="TextView" />
 </LinearLayout>
+</RelativeLayout>

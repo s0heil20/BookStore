@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
@@ -15,6 +17,7 @@ import androidx.loader.content.Loader;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import edu.sharif.bookstore.finalizeOrder.FinalizeOrderActivity;
@@ -26,11 +29,11 @@ import edu.sharif.bookstore.navigationBar.NavBarActivity;
 
 public class DetailedBookActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<Book> {
 
-    private LinearLayout mainLinearLayout;
+    private LinearLayout commentsListDetailed;
     private String bookId;
-    private Button buyButton;
-    private Button addOrRemoveFromFavoriteButton;
-    private Button shareButton;
+    private ImageView buyButton;
+    private ToggleButton addOrRemoveFromFavoriteButton;
+    private ImageView shareButton;
     private Button submitButton;
     private RatingBar ratingBar;
     private TextInputEditText commentTextInput;
@@ -70,7 +73,7 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
 
     private void loadAllViews() {
         // main layout!
-        this.mainLinearLayout = (LinearLayout) findViewById(R.id.mainLinearLayoutDetailed);
+        this.commentsListDetailed = (LinearLayout) findViewById(R.id.commentsListDetailed);
         // Text Views!
         this.titleTextViewDetailed = ((TextView) findViewById(R.id.titleTextViewDetailed));
         this.priceTextViewDetailed = ((TextView) findViewById(R.id.priceTextViewDetailed));
@@ -83,9 +86,9 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         this.leftTextViewDetailed = ((TextView) findViewById(R.id.leftTextViewDetailed));
         this.descriptionTextViewDetailed = ((TextView) findViewById(R.id.descriptionTextViewDetailed));
         // Buttons!
-        this.buyButton = (Button) findViewById(R.id.buyButtonDetailed);
-        this.addOrRemoveFromFavoriteButton = (Button) findViewById(R.id.addToFavoriteButtonDetailed);
-        this.shareButton = (Button) findViewById(R.id.shareButtonDetailed);
+        this.buyButton = (ImageView) findViewById(R.id.buyButtonDetailed);
+        this.addOrRemoveFromFavoriteButton = (ToggleButton) findViewById(R.id.addToFavoriteButtonDetailed);
+        this.shareButton = (ImageView) findViewById(R.id.shareButtonDetailed);
         this.submitButton = (Button) findViewById(R.id.submitButtonDetailed);
         // image view!
         this.imageViewDetailed = (ImageView) findViewById(R.id.bookImageViewDetailed);
@@ -110,7 +113,7 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         });
     }
 
-    private void configureShareButton(Button shareButton) {
+    private void configureShareButton(ImageView shareButton) {
         // TODO create intent to share with available apps!
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,43 +123,51 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         });
     }
 
-    private void configureAddOrRemoveFromFavoriteButton(Button addOrRemoveFromFavoriteButton) {
+    private void configureAddOrRemoveFromFavoriteButton(ToggleButton addOrRemoveFromFavoriteButton) {
         // TODO give book name to be added to favorites!
-        addOrRemoveFromFavoriteButton.setOnClickListener(new View.OnClickListener() {
+        boolean isBookInFavorites = sqlDatabaseManager.getFavouriteDatabaseManager().isBookInFavourites(this.bookId);
+        addOrRemoveFromFavoriteButton.setChecked(isBookInFavorites);
+        addOrRemoveFromFavoriteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                sqlDatabaseManager.getFavouriteDatabaseManager().addBookToFavourites(bookId);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    sqlDatabaseManager.getFavouriteDatabaseManager().addBookToFavourites(bookId);
+                } else {
+                    sqlDatabaseManager.getFavouriteDatabaseManager().removeFromFavourites(bookId);
+                }
             }
         });
     }
 
-    private void configureBuyButton(Button buyButton) {
+    private void configureBuyButton(ImageView buyButton) {
         // TODO proceed to next activity!
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sqlDatabaseManager.getCartDatabaseManager().addToCart(bookId);
-                startActivity(new Intent(getBaseContext(), FinalizeOrderActivity.class));
+                // startActivity(new Intent(getBaseContext(), FinalizeOrderActivity.class));
             }
         });
     }
 
     private void configureTextViews(Book book) {
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(1);
         this.titleTextViewDetailed.setText(book.getTitle());
-        this.priceTextViewDetailed.setText(String.valueOf(book.getPrice()));
-        this.categoryTextViewDetailed.setText(book.getCategory());
+        this.priceTextViewDetailed.setText("Price: "+book.getPrice()+"$");
+        this.categoryTextViewDetailed.setText("Categories: "+book.getCategory());
         String authors = "Authors: ";
         for (String author : book.getAuthors()) {
             authors = authors + author + ", ";
         }
         ((TextView) findViewById(R.id.authorsTextViewDetailed)).setText(authors);
-        ((TextView) findViewById(R.id.pageCountTextViewDetailed)).setText(book.getPageCount()+"");
-        ((TextView) findViewById(R.id.ratingTextViewDetailed)).setText(book.getAvgRating()+"");
-        ((TextView) findViewById(R.id.noRatingTextView)).setText(book.getNoRatings()+"");
-        ((TextView) findViewById(R.id.yearTextViewDetailed)).setText(book.getDatePublished());
-        ((TextView) findViewById(R.id.leftTextViewDetailed)).setText(book.getNumbersLeft()+"");
+        ((TextView) findViewById(R.id.pageCountTextViewDetailed)).setText("Page count: "+book.getPageCount()+"");
+        ((TextView) findViewById(R.id.ratingTextViewDetailed)).setText("Rating: "+df.format(book.getAvgRating())+"");
+        ((TextView) findViewById(R.id.noRatingTextView)).setText("Rating Count: "+book.getNoRatings()+"");
+        ((TextView) findViewById(R.id.yearTextViewDetailed)).setText("Date published: "+book.getDatePublished());
+        ((TextView) findViewById(R.id.leftTextViewDetailed)).setText("Numbers in stock: "+book.getNumbersLeft()+"");
         ((ImageView) findViewById(R.id.bookImageViewDetailed)).setImageDrawable(book.getImage());
-        ((TextView) findViewById(R.id.descriptionTextViewDetailed)).setText(book.getDescription());
+        ((TextView) findViewById(R.id.descriptionTextViewDetailed)).setText("Description: "+book.getDescription());
     }
 
     private void configureButtons(){
@@ -169,7 +180,9 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
     private void loadAllFeedBacks(){
         List<Feedback> feedbacks = sqlDatabaseManager.getFeedbackDatabaseManager().getBookFeedbacks(bookId);
         for (Feedback feedback : feedbacks) {
-            this.mainLinearLayout.addView(createFeedbackView(feedback));
+            if (!feedback.getComment().equals("")) {
+                this.commentsListDetailed.addView(createFeedbackView(feedback));
+            }
         }
     }
 
@@ -178,9 +191,9 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         TextView usernameTextView = (TextView) feedbackView.findViewById(R.id.userIdComment);
         TextView ratingTextView = (TextView) feedbackView.findViewById(R.id.ratingComment);
         TextView commentTextView = (TextView) feedbackView.findViewById(R.id.descriptionComment);
-        usernameTextView.setText(feedback.getUsername());
-        ratingTextView.setText(feedback.getRating()+"");
-        commentTextView.setText(feedback.getComment());
+        usernameTextView.setText("Username: " +feedback.getUsername());
+        ratingTextView.setText("Rated: "+feedback.getRating()+"");
+        commentTextView.setText("Description: " + feedback.getComment());
         return feedbackView;
     }
 
