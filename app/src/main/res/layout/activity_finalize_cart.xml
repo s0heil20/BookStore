@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:gravity="center_horizontal">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "@string/totalPrice"
+        android:layout_marginTop="50dp"
+        android:textSize="15sp"
+        />
     <TextView
         android:id="@+id/totalCostTextViewFinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="177dp"
+        android:layout_marginTop="10dp"
         android:text="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="30sp"
+        />
 
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
     <TextView
         android:id="@+id/dateTextViewFinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/calendarImageViewButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalCostTextViewFinal" />
+        android:text="@string/enterDateHere"
+         />
 
     <ImageView
         android:id="@+id/calendarImageViewButton"
-        android:layout_width="21dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="75dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
         android:clickable="true"
-        app:layout_constraintStart_toEndOf="@+id/dateTextViewFinal"
-        app:layout_constraintTop_toBottomOf="@+id/totalCostTextViewFinal"
         app:srcCompat="@drawable/baseline_calendar_month_24" />
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
+
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="40dp"
         android:contentDescription="Enter your address here!"
         android:ems="10"
         android:hint="Address"
@@ -72,14 +78,10 @@
 
     <Button
         android:id="@+id/submitButtonFinalize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="160dp"
-        android:text="Submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        android:text="Finalize Order"
+        android:backgroundTint="@color/black"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

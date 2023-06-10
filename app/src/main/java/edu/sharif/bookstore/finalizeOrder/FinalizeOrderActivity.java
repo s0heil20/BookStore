@@ -19,6 +19,7 @@ import java.util.Calendar;
 
 import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
+import edu.sharif.bookstore.exception.OrderException;
 import edu.sharif.bookstore.navigationBar.NavBarActivity;
 
 public class FinalizeOrderActivity extends NavBarActivity implements DatePickerDialog.OnDateSetListener {
@@ -59,16 +60,23 @@ public class FinalizeOrderActivity extends NavBarActivity implements DatePickerD
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int totalPrice = Integer.valueOf(totalPriceTextView.getText().toString());
+                int totalPrice = Integer.valueOf(totalPriceTextView.getText().toString().substring(0, totalPriceTextView.getText().toString().length()-1));
                 String address = addressText.getText().toString();
                 String date = dateTextView.getText().toString();
-                sqlDatabaseManager.getCartDatabaseManager().finalizeCart(address, date, totalPrice);
+                try {
+                    sqlDatabaseManager.getCartDatabaseManager().finalizeCart(address, date, totalPrice);
+                } catch (OrderException e) {
+                    Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }
 
     private void configureTotalCostTextView(TextView totalPriceTextView){
-        // sqlDatabaseManager.getCartDatabaseManager().g
+        int totalCost = sqlDatabaseManager.getCartDatabaseManager().getTotalCost();
+        totalPriceTextView.setText(totalCost+"$");
+
     }
 
     private void configureImageButton(ImageView calendarImageButton){
