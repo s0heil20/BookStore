@@ -52,45 +52,61 @@ public class StockDatabaseManager implements EntityDatabaseManager {
     }
 
     public void reduceStock(String bookId, int value) {
-        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
-
         Cursor row = getBookRow(bookId);
 
         if (row.getCount() == 0) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(BOOK_ID_FIELD, bookId);
-            contentValues.put(STOCK_FIELD, BASE_STOCK - value);
-
-            sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+            addBookRow(bookId, BASE_STOCK - value);
         } else {
-            row.moveToFirst();
-            Log.d("salammm", "addRating: " + DatabaseUtils.dumpCursorToString(row));
-            int stock = row.getInt(2);
-
-            StringBuilder sql;
-            sql = new StringBuilder()
-                    .append("UPDATE ")
-                    .append(TABLE_NAME)
-                    .append(" SET ")
-                    .append(STOCK_FIELD)
-                    .append(" = ")
-                    .append(stock - value)
-                    .append(" WHERE ")
-                    .append(BOOK_ID_FIELD)
-                    .append(" = '")
-                    .append(bookId)
-                    .append("'");
-
-            Log.d("salammm", "addRating: " + sql.toString());
-
-            sqLiteDatabase.execSQL(sql.toString());
+            reduceRowStock(row, bookId, value);
         }
     }
 
-    public int getBookStock(String bookId){
-        Cursor row = getBookRow(bookId);
+    private void addBookRow(String bookId, int firstValue) {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BOOK_ID_FIELD, bookId);
+        contentValues.put(STOCK_FIELD, firstValue);
+
+        sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+        sqLiteDatabase.close();
+    }
+
+    private void reduceRowStock(Cursor row, String bookId, int value) {
+        SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
+
         row.moveToFirst();
-        return row.getInt(2);
+        int stock = row.getInt(2);
+
+        StringBuilder sql;
+        sql = new StringBuilder()
+                .append("UPDATE ")
+                .append(TABLE_NAME)
+                .append(" SET ")
+                .append(STOCK_FIELD)
+                .append(" = ")
+                .append(stock - value)
+                .append(" WHERE ")
+                .append(BOOK_ID_FIELD)
+                .append(" = '")
+                .append(bookId)
+                .append("'");
+
+        Log.d("salammm", "addRating: " + sql.toString());
+
+        sqLiteDatabase.execSQL(sql.toString());
+        sqLiteDatabase.close();
+    }
+
+    public int getBookStock(String bookId) {
+        Cursor row = getBookRow(bookId);
+        if (row.getCount() == 0) {
+            addBookRow(bookId, BASE_STOCK);
+            return BASE_STOCK;
+        } else {
+            row.moveToFirst();
+            return row.getInt(2);
+        }
     }
 
     private Cursor getBookRow(String bookId) {
