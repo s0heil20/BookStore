@@ -61,5 +61,6 @@ Change user profile attributes here!
 
 ## Cart history menu
 You can see a list of purchases that you have made in this menu!
+
 ![cartHistoryMenu](https://github.com/s0heil20/BookStore/assets/59290468/1e610ae4-86ec-4814-811f-e0e1229ae3db)
 
