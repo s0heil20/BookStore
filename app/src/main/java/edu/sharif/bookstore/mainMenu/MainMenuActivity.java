@@ -1,9 +1,11 @@
 package edu.sharif.bookstore.mainMenu;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +25,10 @@ public class MainMenuActivity extends NavBarActivity implements LoaderManager.Lo
     private static final String sampleListQueryType = "intitle";
     private ArrayList<Book> bookList;
     private RecyclerView recyclerView;
+
+    private int NightMode;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,19 @@ public class MainMenuActivity extends NavBarActivity implements LoaderManager.Lo
         queryBundle.putString("queryType", sampleListQueryType);
         getSupportLoaderManager().restartLoader(0, queryBundle, this);
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        NightMode = AppCompatDelegate.getDefaultNightMode();
+
+        sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        editor.putInt("NightModeInt", NightMode);
+        editor.commit();
     }
 
     private void addBookItemsToRecyclerView(List<Book> books) {

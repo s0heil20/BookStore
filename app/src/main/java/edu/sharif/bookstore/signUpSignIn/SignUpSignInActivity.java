@@ -9,7 +9,9 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -25,7 +27,9 @@ public class SignUpSignInActivity extends AppCompatActivity {
     private static final String username = "username";
     private static final String password = "password";
 
+    private int NightMode;
     private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,19 @@ public class SignUpSignInActivity extends AppCompatActivity {
         }
 
         viewFlipper = findViewById(R.id.viewFlipper);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        NightMode = AppCompatDelegate.getDefaultNightMode();
+
+        sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        editor.putInt("NightModeInt", NightMode);
+        editor.commit();
     }
 
     public void goToSignIn(View view) {
