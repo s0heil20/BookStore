@@ -14,16 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.sharif.bookstore.bookCard.BookCardAdapter;
+import edu.sharif.bookstore.bookCard.BookCardItem;
+import edu.sharif.bookstore.bookCard.SelectBookCardListener;
+import edu.sharif.bookstore.database.SQLDatabaseManager;
 import edu.sharif.bookstore.search.BookLoader;
 import edu.sharif.bookstore.detailedBook.DetailedBookActivity;
 import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.entity.Book;
 import edu.sharif.bookstore.navigationBar.NavBarActivity;
 
-public class MainMenuActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<List<Book>>, SelectMainMenuItemInterface {
+public class MainMenuActivity extends NavBarActivity implements LoaderManager.LoaderCallbacks<List<Book>>, SelectBookCardListener {
     private static final String sampleListQueryString = "android java";
     private static final String sampleListQueryType = "intitle";
     private ArrayList<Book> bookList;
+
+    private BookCardAdapter adapter;
     private RecyclerView recyclerView;
 
     private int NightMode;
@@ -38,19 +44,6 @@ public class MainMenuActivity extends NavBarActivity implements LoaderManager.Lo
         handleParentView(R.layout.nav_main_menu);
 
         recyclerView = findViewById(R.id.bookListRecyclerView);
-
-//        List<MainMenuItem> items = new ArrayList<MainMenuItem>();
-//        items.add(new MainMenuItem(0, "SALAM", "5/11","10$"));
-//        items.add(new MainMenuItem(0, "SALAM", "5/11","10$"));
-//        items.add(new MainMenuItem(0, "SALAM", "5/11","10$"));
-//        items.add(new MainMenuItem(0, "SALAM", "5/11","10$"));
-//        items.add(new MainMenuItem(0, "SALAM", "5/11","10$"));
-//        items.add(new MainMenuItem(0, "SALAM", "5/11","10$"));
-//        items.add(new MainMenuItem(0, "SALAM", "5/11","10$"));
-//
-//
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(new MainMenuAdapter(getApplicationContext(), items));
 
         Bundle queryBundle = new Bundle();
         queryBundle.putString("queryString", sampleListQueryString);
@@ -73,12 +66,17 @@ public class MainMenuActivity extends NavBarActivity implements LoaderManager.Lo
     }
 
     private void addBookItemsToRecyclerView(List<Book> books) {
-        List<MainMenuItem> items = new ArrayList<MainMenuItem>();
+        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+        ArrayList<String> favouriteBooks = sqlDatabaseManager.getFavouriteDatabaseManager().getFavouriteBooks();
+
+        List<BookCardItem> items = new ArrayList<BookCardItem>();
         for (Book book : books) {
-            items.add(new MainMenuItem(book.getImage(), book.getTitle(), book.getAvgRating(), book.getPrice()+"", book.getBookId()));
+            items.add(new BookCardItem(book.getAuthors(), book.getTitle(), book.getPublisher(),
+                    String.valueOf(book.getPrice()), book.getBookId(), book.getImage(), book.getAvgRating(),  favouriteBooks.contains(book.getBookId())));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MainMenuAdapter(getApplicationContext(), items, this));
+        adapter = new BookCardAdapter(this, items, false, this);
+        recyclerView.setAdapter(adapter);
     }
 
 
@@ -98,9 +96,12 @@ public class MainMenuActivity extends NavBarActivity implements LoaderManager.Lo
     }
 
     @Override
-    public void onItemClicked(MainMenuItem bookItem) {
-        // TODO make intent to go to detailed activity with bookID!
-        // Toast.makeText(this, "CLICKED ON " + bookItem.bookId , Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this, DetailedBookActivity.class).putExtra("bookId", bookItem.bookId));
+    public void onItemClicked(BookCardItem bookCardItem) {
+        startActivity(new Intent(this, DetailedBookActivity.class).putExtra("bookId", bookCardItem.getBookId()));
+    }
+
+    @Override
+    public void onDeleteItemClicked(BookCardItem bookCardItem) {
+
     }
 }
