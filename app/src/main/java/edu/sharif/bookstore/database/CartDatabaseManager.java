@@ -95,6 +95,7 @@ public class CartDatabaseManager implements EntityDatabaseManager {
 
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
 
+        reduceBookStock();
 
     }
 
@@ -145,6 +146,15 @@ public class CartDatabaseManager implements EntityDatabaseManager {
         }
         return cartList;
 
+    }
+
+    public int getTotalCost() {
+        PriceDatabaseManager priceDatabaseManager = sqlDatabaseManager.getPriceDatabaseManager();
+        int totalPrice = 0;
+        for (String bookId : bookIds) {
+            totalPrice += priceDatabaseManager.getBookPrice(bookId);
+        }
+        return totalPrice;
     }
 
 

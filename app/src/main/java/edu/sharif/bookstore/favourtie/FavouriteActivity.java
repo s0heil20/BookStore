@@ -2,6 +2,7 @@ package edu.sharif.bookstore.favourtie;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,11 +36,13 @@ public class FavouriteActivity extends NavBarActivity implements LoaderManager.L
         handleParentView(R.layout.nav_favourite);
 
         recyclerView = findViewById(R.id.favouriteRecyclerView);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
         getSupportLoaderManager().restartLoader(0, null, this);
     }
 
@@ -64,9 +67,7 @@ public class FavouriteActivity extends NavBarActivity implements LoaderManager.L
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Book>> loader, List<Book> books) {
-        if (books.size() > 0) {
-            addBookItemsToRecyclerView(books);
-        }
+        addBookItemsToRecyclerView(books);
     }
 
     @Override
