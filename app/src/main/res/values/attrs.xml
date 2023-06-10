@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Frame">
+        <attr name="blueBackground" format="color"/>
+        <attr name="blueBorder" format="color"/>
+        <attr name="yellowBackground" format="color"/>
+        <attr name="yellowBorder" format="color"/>
+    </declare-styleable>
+</resources>

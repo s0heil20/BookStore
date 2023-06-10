@@ -5,6 +5,10 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="android:colorBackground">@color/darkBlue</item>
         <item name="android:textColor">@color/almostWhite</item>
+        <item name="blueBackground">@color/mediumDarkBlue</item>
+        <item name="blueBorder">@color/lightBlue</item>
+        <item name="yellowBackground">@color/duskYellow</item>
+        <item name="yellowBorder">@color/lightYellow</item>
         <item name="fontFamily">@font/univanova</item>
     </style>
 </resources>
