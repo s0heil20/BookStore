@@ -55,26 +55,19 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
 
         autoCompleteTextView.setAdapter(adapterItems);
 
-        autoCompleteTextView.setText(dropdownItems[0],false);
+        autoCompleteTextView.setText(dropdownItems[0], false);
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 String item = adapterView.getItemAtPosition(i).toString();
-                Log.d("salam", "onItemClick: " + item);
                 queryType = "in" + item;
-                getQueryResult(queryString, queryType);
+                if (!queryString.equals("")) {
+                    getQueryResult(queryString, queryType);
+                }
             }
         });
-
-
-//        items = new ArrayList<>();
-//        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
-//        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
-//        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
-//        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
-//        items.add(new BookCardItem("book", "rouzbeh", "soheil", "10$"));
 
 
         recyclerView = findViewById(R.id.searchRecyclerView);
