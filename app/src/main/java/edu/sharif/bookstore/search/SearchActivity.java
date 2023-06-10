@@ -108,8 +108,8 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
     private void addBookItemsToRecyclerView(List<Book> books) {
         List<BookCardItem> items = new ArrayList<BookCardItem>();
         for (Book book : books) {
-            items.add(new BookCardItem(book.getTitle(), book.getPublisher(), book.getAuthors().get(0),
-                    String.valueOf(book.getPrice()), book.getBookId(), book.getImage()));
+            items.add(new BookCardItem(book.getAuthors(), book.getTitle(), book.getPublisher(),
+                    String.valueOf(book.getPrice()), book.getBookId(), book.getImage(), book.getAvgRating()));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BookCardAdapter(this, items, false, this);

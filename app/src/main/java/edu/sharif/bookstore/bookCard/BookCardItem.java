@@ -2,18 +2,25 @@ package edu.sharif.bookstore.bookCard;
 
 import android.graphics.drawable.Drawable;
 
+import java.util.List;
+
 public class BookCardItem {
-    private String bookTitle, publisherName, authorName, price, bookId;
+    private List<String> authorNames;
+    private String bookTitle, publisherName, price, bookId;
 
     private Drawable bookCardImage;
 
-    public BookCardItem(String bookTitle, String publisherName, String authorName, String price, String bookId, Drawable bookCardImage) {
+    private float rating;
+
+    public BookCardItem(List<String> authorNames, String bookTitle, String publisherName,
+                        String price, String bookId, Drawable bookCardImage, float rating) {
+        this.authorNames = authorNames;
         this.bookTitle = bookTitle;
         this.publisherName = publisherName;
-        this.authorName = authorName;
         this.price = price;
         this.bookId = bookId;
         this.bookCardImage = bookCardImage;
+        this.rating = rating;
     }
 
     public String getBookTitle() {
@@ -24,12 +31,20 @@ public class BookCardItem {
         return publisherName;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getAuthorNames() {
+        StringBuilder result = new StringBuilder();
+        for (String authorName : authorNames) {
+            result.append(authorName).append(", ");
+        }
+        return result.substring(0, result.length() - 2);
+    }
+
+    public float getRating() {
+        return rating;
     }
 
     public String getPrice() {
-        return price;
+        return price + "$";
     }
 
     public Drawable getBookCardImage() {
@@ -48,8 +63,12 @@ public class BookCardItem {
         this.publisherName = publisherName;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setAuthorNames(List<String> authorNames) {
+        this.authorNames = authorNames;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     public void setPrice(String price) {
