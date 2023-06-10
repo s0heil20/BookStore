@@ -12,5 +12,6 @@
     <color name="duskYellow">#D3891C</color>
     <color name="almostWhite">#ECF2FF</color>
     <color name="heartRed">#FF1F1F</color>
+    <color name="lightOrange">#FFA500</color>
 
 </resources>

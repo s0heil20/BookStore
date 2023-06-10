@@ -9,6 +9,8 @@
         <item name="yellowBackground">@color/lightYellow</item>
         <item name="yellowBorder">@color/duskYellow</item>
         <item name="fontFamily">@font/univanova</item>
+        <item name="colorPrimary">@color/mediumLightBlue</item>
+
     </style>
 
     <style name="Theme.BookStore" parent="Base.Theme.BookStore" />

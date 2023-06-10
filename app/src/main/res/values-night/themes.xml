@@ -10,5 +10,6 @@
         <item name="yellowBackground">@color/duskYellow</item>
         <item name="yellowBorder">@color/lightYellow</item>
         <item name="fontFamily">@font/univanova</item>
+        <item name="colorPrimary">@color/lightOrange</item>
     </style>
 </resources>
