@@ -2,6 +2,7 @@ package edu.sharif.bookstore.bookCard;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ public class BookCardViewHolder extends RecyclerView.ViewHolder {
 
     CardView cardView;
 
+    RatingBar ratingBar;
+
     public BookCardViewHolder(@NonNull View itemView) {
         super(itemView);
         bookTitleTextView = itemView.findViewById(R.id.bookTitle);
@@ -25,5 +28,6 @@ public class BookCardViewHolder extends RecyclerView.ViewHolder {
         deleteImageView = itemView.findViewById(R.id.deleteImageView);
         bookCardImageView = itemView.findViewById(R.id.bookCardImageView);
         cardView = itemView.findViewById(R.id.bookCardView);
+        ratingBar = itemView.findViewById(R.id.cardRatingBar);
     }
 }

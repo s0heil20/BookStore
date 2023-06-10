@@ -43,9 +43,11 @@ public class BookCardAdapter extends RecyclerView.Adapter<BookCardViewHolder> {
     public void onBindViewHolder(@NonNull BookCardViewHolder holder, int position) {
         holder.bookTitleTextView.setText(items.get(position).getBookTitle());
         holder.publisherNameTextView.setText(items.get(position).getPublisherName());
-        holder.authorNameTextView.setText(items.get(position).getAuthorName());
+        holder.authorNameTextView.setText(items.get(position).getAuthorNames());
         holder.priceTextView.setText(items.get(position).getPrice());
         holder.bookCardImageView.setImageDrawable(items.get(position).getBookCardImage());
+        holder.ratingBar.setRating(items.get(position).getRating());
+
         if (isDeleteVisible) {
             holder.deleteImageView.setVisibility(View.VISIBLE);
         }
@@ -53,13 +55,13 @@ public class BookCardAdapter extends RecyclerView.Adapter<BookCardViewHolder> {
         holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectBookCardListener.onDeleteItemClicked(items.get(position));
+                selectBookCardListener.onDeleteItemClicked(items.get(holder.getAdapterPosition()));
             }
         });
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectBookCardListener.onItemClicked(items.get(position));
+                selectBookCardListener.onItemClicked(items.get(holder.getAdapterPosition()));
             }
         });
     }
