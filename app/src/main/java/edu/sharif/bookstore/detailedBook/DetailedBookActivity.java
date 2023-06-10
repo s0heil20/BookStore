@@ -21,6 +21,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import edu.sharif.bookstore.exception.OrderException;
 import edu.sharif.bookstore.finalizeOrder.FinalizeOrderActivity;
 import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
@@ -150,8 +151,12 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sqlDatabaseManager.getCartDatabaseManager().addToCart(bookId);
-                Toast.makeText(getBaseContext(), "Added to Cart!" , Toast.LENGTH_SHORT).show();
+                try {
+                    sqlDatabaseManager.getCartDatabaseManager().addToCart(bookId);
+                    Toast.makeText(getBaseContext(), "Added to Cart!" , Toast.LENGTH_SHORT).show();
+                } catch (OrderException e){
+                    Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
                 // startActivity(new Intent(getBaseContext(), FinalizeOrderActivity.class));
             }
         });

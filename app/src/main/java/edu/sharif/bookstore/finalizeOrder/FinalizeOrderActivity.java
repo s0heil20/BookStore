@@ -19,6 +19,7 @@ import java.util.Calendar;
 
 import edu.sharif.bookstore.R;
 import edu.sharif.bookstore.database.SQLDatabaseManager;
+import edu.sharif.bookstore.exception.OrderException;
 import edu.sharif.bookstore.navigationBar.NavBarActivity;
 
 public class FinalizeOrderActivity extends NavBarActivity implements DatePickerDialog.OnDateSetListener {
@@ -62,11 +63,12 @@ public class FinalizeOrderActivity extends NavBarActivity implements DatePickerD
                 int totalPrice = Integer.valueOf(totalPriceTextView.getText().toString().substring(0, totalPriceTextView.getText().toString().length()-1));
                 String address = addressText.getText().toString();
                 String date = dateTextView.getText().toString();
-                if (!date.equals("Choose Date")) {
+                try {
                     sqlDatabaseManager.getCartDatabaseManager().finalizeCart(address, date, totalPrice);
-                } else {
-                    Toast.makeText(getBaseContext(), "Please Choose Date!" , Toast.LENGTH_LONG).show();
+                } catch (OrderException e) {
+                    Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
+
             }
         });
     }
