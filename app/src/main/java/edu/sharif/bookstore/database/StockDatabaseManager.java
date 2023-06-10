@@ -88,7 +88,9 @@ public class StockDatabaseManager implements EntityDatabaseManager {
     }
 
     public int getBookStock(String bookId){
-        return 0;
+        Cursor row = getBookRow(bookId);
+        row.moveToFirst();
+        return row.getInt(2);
     }
 
     private Cursor getBookRow(String bookId) {

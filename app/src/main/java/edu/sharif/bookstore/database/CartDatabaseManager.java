@@ -8,9 +8,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import edu.sharif.bookstore.entity.Cart;
 import edu.sharif.bookstore.entity.User;
+import edu.sharif.bookstore.exception.OrderException;
+import edu.sharif.bookstore.exception.OrderExceptionType;
 import edu.sharif.bookstore.utils.BookIdListJSONConverter;
 
 public class CartDatabaseManager implements EntityDatabaseManager {
@@ -73,7 +76,11 @@ public class CartDatabaseManager implements EntityDatabaseManager {
         return bookIds;
     }
 
-    public void addToCart(String bookId) {
+    public void addToCart(String bookId) throws OrderException{
+        int bookStock = sqlDatabaseManager.getStockDatabaseManager().getBookStock(bookId);
+        if (bookStock == 0){
+            throw new OrderException("Book " + bookId + "is out of stock", OrderExceptionType.BOOK_OUT_OF_STOCK);
+        }
         bookIds.add(bookId);
     }
 
@@ -81,7 +88,15 @@ public class CartDatabaseManager implements EntityDatabaseManager {
         bookIds.remove(bookId);
     }
 
-    public void finalizeCart(String address, String date, int totalPrice) {
+    public void finalizeCart(String address, String date, int totalPrice) throws OrderException {
+
+        if (Objects.equals(date, "Choose Date")){
+            throw new OrderException("You must choose date", OrderExceptionType.DATE_EMPTY);
+        }
+        else if (address.equals("")){
+            throw new OrderException("You must enter your address", OrderExceptionType.ADDRESS_EMPTY);
+        }
+
         User loggedInUser = sqlDatabaseManager.getUserDatabaseManager().getLoggedInUser();
 
         SQLiteDatabase sqLiteDatabase = sqlDatabaseManager.getWritableDatabase();
