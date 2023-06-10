@@ -35,10 +35,12 @@ public class FavouriteActivity extends NavBarActivity implements LoaderManager.L
         handleParentView(R.layout.nav_favourite);
 
         recyclerView = findViewById(R.id.favouriteRecyclerView);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         getSupportLoaderManager().restartLoader(0, null, this);
-
-
     }
 
     private void addBookItemsToRecyclerView(List<Book> books) {
