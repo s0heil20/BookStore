@@ -79,4 +79,9 @@ public class FavouriteActivity extends NavBarActivity implements LoaderManager.L
     public void onItemClicked(BookCardItem bookCardItem) {
         startActivity(new Intent(this, DetailedBookActivity.class).putExtra("bookId", bookCardItem.getBookId()));
     }
+
+    @Override
+    public void onDeleteItemClicked(BookCardItem bookCardItem) {
+
+    }
 }

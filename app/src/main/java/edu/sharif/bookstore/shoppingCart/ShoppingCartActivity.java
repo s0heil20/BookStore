@@ -42,8 +42,6 @@ public class ShoppingCartActivity extends NavBarActivity implements LoaderManage
 
         recyclerView = findViewById(R.id.shoppingCartRecyclerView);
 
-        getSupportLoaderManager().restartLoader(0, null, this);
-
         purchaseButton = findViewById(R.id.purchaseButton);
 
         purchaseButton.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +52,12 @@ public class ShoppingCartActivity extends NavBarActivity implements LoaderManage
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getSupportLoaderManager().restartLoader(0, null, this);
+    }
+
     private void addBookItemsToRecyclerView(List<Book> books) {
         List<BookCardItem> items = new ArrayList<BookCardItem>();
         for (Book book : books) {
@@ -61,7 +65,7 @@ public class ShoppingCartActivity extends NavBarActivity implements LoaderManage
                     String.valueOf(book.getPrice()), book.getBookId(), book.getImage()));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new BookCardAdapter(this, items, false, this);
+        adapter = new BookCardAdapter(this, items, true, this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -75,9 +79,7 @@ public class ShoppingCartActivity extends NavBarActivity implements LoaderManage
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Book>> loader, List<Book> books) {
-        if (books.size() > 0) {
-            addBookItemsToRecyclerView(books);
-        }
+        addBookItemsToRecyclerView(books);
     }
 
     @Override
@@ -88,5 +90,12 @@ public class ShoppingCartActivity extends NavBarActivity implements LoaderManage
     @Override
     public void onItemClicked(BookCardItem bookCardItem) {
         startActivity(new Intent(this, DetailedBookActivity.class).putExtra("bookId", bookCardItem.getBookId()));
+    }
+
+    @Override
+    public void onDeleteItemClicked(BookCardItem bookCardItem) {
+        SQLDatabaseManager sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
+        sqlDatabaseManager.getCartDatabaseManager().removeFromCart(bookCardItem.getBookId());
+        getSupportLoaderManager().restartLoader(0, null, this);
     }
 }

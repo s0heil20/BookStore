@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.sharif.bookstore.R;
+import edu.sharif.bookstore.database.SQLDatabaseManager;
 
 public class BookCardAdapter extends RecyclerView.Adapter<BookCardViewHolder> {
+
+    private Context context;
     private LayoutInflater layoutInflater;
     private List<BookCardItem> items;
     private Boolean isDeleteVisible;
@@ -22,6 +25,7 @@ public class BookCardAdapter extends RecyclerView.Adapter<BookCardViewHolder> {
 
 
     public BookCardAdapter(Context context, List<BookCardItem> items, Boolean isDeleteVisible, SelectBookCardListener selectBookCardListener) {
+        this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.items = items;
         this.isDeleteVisible = isDeleteVisible;
@@ -44,14 +48,14 @@ public class BookCardAdapter extends RecyclerView.Adapter<BookCardViewHolder> {
         holder.bookCardImageView.setImageDrawable(items.get(position).getBookCardImage());
         if (isDeleteVisible) {
             holder.deleteImageView.setVisibility(View.VISIBLE);
-            holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d("a", "onClick: h");
-                }
-            });
         }
 
+        holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectBookCardListener.onDeleteItemClicked(items.get(position));
+            }
+        });
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
