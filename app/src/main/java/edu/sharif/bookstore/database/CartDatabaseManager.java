@@ -76,9 +76,12 @@ public class CartDatabaseManager implements EntityDatabaseManager {
         return bookIds;
     }
 
-    public void addToCart(String bookId) throws OrderException{
+    public void addToCart(String bookId) throws OrderException {
+        if (bookIds.contains(bookId)) {
+            throw new OrderException("Book already added", OrderExceptionType.REPEATED_BOOK);
+        }
         int bookStock = sqlDatabaseManager.getStockDatabaseManager().getBookStock(bookId);
-        if (bookStock == 0){
+        if (bookStock == 0) {
             throw new OrderException("Book " + bookId + "is out of stock", OrderExceptionType.BOOK_OUT_OF_STOCK);
         }
         bookIds.add(bookId);
@@ -90,10 +93,9 @@ public class CartDatabaseManager implements EntityDatabaseManager {
 
     public void finalizeCart(String address, String date, int totalPrice) throws OrderException {
 
-        if (Objects.equals(date, "Choose Date")){
+        if (Objects.equals(date, "Choose Date")) {
             throw new OrderException("You must choose date", OrderExceptionType.DATE_EMPTY);
-        }
-        else if (address.equals("")){
+        } else if (address.equals("")) {
             throw new OrderException("You must enter your address", OrderExceptionType.ADDRESS_EMPTY);
         }
 
