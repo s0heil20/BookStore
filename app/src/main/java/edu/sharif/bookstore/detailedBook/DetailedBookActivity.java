@@ -99,6 +99,7 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         this.commentTextInput = (TextInputEditText) findViewById(R.id.commentTextInput);
         // rating bar!
         this.ratingBar =  findViewById(R.id.ratingBarDetailed);
+        ratingBar.setStepSize((float) 1.0);
 
 
     }
