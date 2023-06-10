@@ -29,7 +29,6 @@
                 android:layout_marginTop="24dp"
                 android:text="Sign In"
                 android:textAlignment="center"
-                android:textColor="@color/black"
                 android:textSize="50sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -45,9 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:singleLine="true"
-                    android:textColor="@color/black" />
-
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,9 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:singleLine="true"
-                    android:textColor="@color/black" />
-
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +84,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Remember Me"
-                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -126,7 +120,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Don't have an Account?"
-                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -136,7 +129,6 @@
                     android:layout_marginStart="10dp"
                     android:onClick="goToSignUp"
                     android:text="Sign Up"
-                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -156,7 +148,6 @@
                 android:layout_marginTop="24dp"
                 android:text="Sign Up"
                 android:textAlignment="center"
-                android:textColor="@color/black"
                 android:textSize="50sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -172,9 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:singleLine="true"
-                    android:textColor="@color/black" />
-
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -192,9 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:singleLine="true"
-                    android:textColor="@color/black" />
-
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -212,9 +199,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:singleLine="true"
-                    android:textColor="@color/black" />
-
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -231,9 +216,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:singleLine="true"
-                    android:textColor="@color/black" />
-
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -269,7 +252,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Already have an Account?"
-                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -279,7 +261,6 @@
                     android:layout_marginStart="10dp"
                     android:onClick="goToSignIn"
                     android:text="Sign In"
-                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 

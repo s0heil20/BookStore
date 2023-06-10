@@ -26,6 +26,7 @@ public class MainMenuActivity extends NavBarActivity implements LoaderManager.Lo
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        pageName = "Main Menu";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_main_menu);
         handleParentView(R.layout.nav_main_menu);

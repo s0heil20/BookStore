@@ -10,28 +10,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="20dp">
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Theme:"
-            android:textSize="20sp"/>
+            android:textSize="32sp"/>
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/toggle"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:onClick="changeTheme"/>
-
-        <TextView
-            android:id="@+id/themeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:textSize="20sp"
-            android:text="Light Mode"/>
+            android:layout_marginHorizontal="20dp">
+            <RadioButton
+                android:id="@+id/systemDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:onClick="onRadioButtonClicked"
+                android:text="System Default"/>
+            <RadioButton
+                android:id="@+id/light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:onClick="onRadioButtonClicked"
+                android:text="Light"/>
+            <RadioButton
+                android:id="@+id/dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:onClick="onRadioButtonClicked"
+                android:text="Dark"/>
+        </RadioGroup>
 
     </LinearLayout>
 

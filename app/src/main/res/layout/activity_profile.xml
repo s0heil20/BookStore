@@ -12,6 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:orientation="vertical">
@@ -21,7 +22,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:text="User Information"
             android:textSize="32sp" />
 
@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:textAlignment="textStart"
-            android:textColor="@color/black"
             android:textSize="24sp"
             android:id="@+id/profileUsername"/>
 
@@ -39,7 +38,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:textAlignment="textStart"
-            android:textColor="@color/black"
             android:textSize="24sp"
             android:id="@+id/profileNickname"/>
 
@@ -48,7 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:text="Password Change"
             android:textSize="32sp" />
 
@@ -66,9 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:singleLine="true"
-                android:textColor="@color/black" />
-
+                android:singleLine="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,9 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:singleLine="true"
-                android:textColor="@color/black" />
-
+                android:singleLine="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,9 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:singleLine="true"
-                android:textColor="@color/black" />
-
+                android:singleLine="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,7 +128,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:text="Account Management"
             android:textSize="32sp" />
 

@@ -55,6 +55,7 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        pageName = "Detailed Book";
         super.onCreate(savedInstanceState);
         sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(this);
         if (getIntent().getExtras().containsKey("bookId")){

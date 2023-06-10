@@ -34,6 +34,7 @@ public class FinalizeOrderActivity extends NavBarActivity implements DatePickerD
     private static final long oneWeek = 7*24*60*60*1000;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        pageName = "Finalize Order";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_finalize_cart);
         handleParentView(R.layout.nav_finalize_cart);
