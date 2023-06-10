@@ -97,6 +97,8 @@ public class CartDatabaseManager implements EntityDatabaseManager {
             throw new OrderException("You must choose date", OrderExceptionType.DATE_EMPTY);
         } else if (address.equals("")) {
             throw new OrderException("You must enter your address", OrderExceptionType.ADDRESS_EMPTY);
+        } else if(bookIds.size() == 0) {
+            throw new OrderException("Add something to your cart first", OrderExceptionType.EMPTY_CART);
         }
 
         User loggedInUser = sqlDatabaseManager.getUserDatabaseManager().getLoggedInUser();
@@ -114,6 +116,7 @@ public class CartDatabaseManager implements EntityDatabaseManager {
 
         reduceBookStock();
 
+        bookIds = new ArrayList<>();
     }
 
     private void reduceBookStock() {
