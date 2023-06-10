@@ -13,7 +13,7 @@ public class StockDatabaseManager implements EntityDatabaseManager {
     private static final String BOOK_ID_FIELD = "book_id";
     private static final String STOCK_FIELD = "stock";
 
-    private static final int BASE_STOCK = 25;
+    private static final int BASE_STOCK = 1;
 
     private SQLDatabaseManager sqlDatabaseManager;
 
