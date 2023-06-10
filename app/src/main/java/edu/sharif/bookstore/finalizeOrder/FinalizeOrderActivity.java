@@ -68,7 +68,7 @@ public class FinalizeOrderActivity extends NavBarActivity implements DatePickerD
     }
 
     private void configureTotalCostTextView(TextView totalPriceTextView){
-        // sqlDatabaseManager.getCartDatabaseManager().g
+        // sqlDatabaseManager.getCartDatabaseManager().getBookIds()
     }
 
     private void configureImageButton(ImageView calendarImageButton){
