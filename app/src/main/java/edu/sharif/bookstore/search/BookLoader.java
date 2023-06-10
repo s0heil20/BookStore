@@ -22,7 +22,7 @@ public class BookLoader extends AsyncTaskLoader {
         this.queryString = queryString;
         this.queryType = queryType;
         this.sortingType = "relevance";
-        this.maxResult = "10";
+        this.maxResult = "5";
         this.sqlDatabaseManager = SQLDatabaseManager.instanceOfDatabase(context);
     }
 
