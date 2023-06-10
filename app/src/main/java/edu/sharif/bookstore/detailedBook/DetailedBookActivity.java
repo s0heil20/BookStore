@@ -101,6 +101,15 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         // rating bar!
         this.ratingBar =  findViewById(R.id.ratingBarDetailed);
         ratingBar.setStepSize((float) 1.0);
+        ratingBar.setRating((float) 1.0);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override public void onRatingChanged(RatingBar ratingBar, float rating,
+                                                  boolean fromUser) {
+                if(rating<1.0f)
+                    ratingBar.setRating(1.0f);
+            }
+        });
 
 
     }
@@ -115,6 +124,7 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
                 Feedback feedback = new Feedback(userName, commentText, bookId, rating);
                 sqlDatabaseManager.getFeedbackDatabaseManager().addFeedback(feedback);
                 Toast.makeText(getBaseContext(), "Comment Submitted!" , Toast.LENGTH_SHORT).show();
+                commentsListDetailed.addView(createFeedbackView(feedback));
             }
         });
     }
