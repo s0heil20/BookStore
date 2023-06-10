@@ -79,7 +79,7 @@ public class NetworkUtils {
                     e.printStackTrace();
                 }
             }
-            System.out.println(bookJSONString);
+            System.out.println("Json String downloaded successfully!");
             return bookJSONString;
         }
     }
@@ -102,6 +102,7 @@ public class NetworkUtils {
             if (buf != null) {
                 buf.close();
             }
+            System.out.println("Image download successful!");
             return new BitmapDrawable(bMap);
         } catch (Exception e) {
             Log.d(LOG_TAG, e.toString());

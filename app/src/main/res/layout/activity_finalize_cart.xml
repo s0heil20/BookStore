@@ -5,19 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     android:gravity="center_horizontal">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "@string/totalPrice"
+        android:layout_marginTop="50dp"
+        android:textSize="15sp"
+        />
     <TextView
         android:id="@+id/totalCostTextViewFinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="177dp"
+        android:layout_marginTop="10dp"
         android:text="100"
+        android:textSize="30sp"
         />
 
     <LinearLayout
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -26,14 +34,14 @@
         android:id="@+id/dateTextViewFinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/enterDateHere"
          />
 
     <ImageView
         android:id="@+id/calendarImageViewButton"
-        android:layout_width="21dp"
-        android:layout_height="20dp"
-
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
         android:clickable="true"
         app:srcCompat="@drawable/baseline_calendar_month_24" />
     </LinearLayout>
@@ -43,9 +51,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
+
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="40dp"
         android:contentDescription="Enter your address here!"
         android:ems="10"
         android:hint="Address"
@@ -72,13 +80,8 @@
         android:id="@+id/submitButtonFinalize"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="161dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="160dp"
         android:text="Finalize Order"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/black_background"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        android:backgroundTint="@color/black"/>
 
 </LinearLayout>

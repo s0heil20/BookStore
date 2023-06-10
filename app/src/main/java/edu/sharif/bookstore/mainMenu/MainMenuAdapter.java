@@ -24,17 +24,16 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuViewHolder> {
         this.listener = listener;
     }
 
-    @NonNull
     @Override
-    public MainMenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainMenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MainMenuViewHolder(LayoutInflater.from(context).inflate(R.layout.main_menu_book_layout,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainMenuViewHolder holder, int position) {
+    public void onBindViewHolder(MainMenuViewHolder holder, int position) {
         holder.titleTextView.setText(items.get(position).getTitle());
         holder.ratingBarMainMenu.setRating(items.get(position).getRating());
-        holder.priceTextView.setText(items.get(position).getPrice());
+        holder.priceTextView.setText("Price: "+items.get(position).getPrice()+"$");
         holder.bookImageView.setImageDrawable(items.get(position).getImage());
         holder.relativeLayout.setOnClickListener((new View.OnClickListener(
 

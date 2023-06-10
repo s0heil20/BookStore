@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +50,7 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
     private TextView descriptionTextViewDetailed;
     private ImageView imageViewDetailed;
     private SQLDatabaseManager sqlDatabaseManager;
+    private Book book;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,6 +111,7 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
                 int rating = (int)ratingBar.getRating();
                 Feedback feedback = new Feedback(userName, commentText, bookId, rating);
                 sqlDatabaseManager.getFeedbackDatabaseManager().addFeedback(feedback);
+                Toast.makeText(getBaseContext(), "Comment Submitted!" , Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -118,7 +121,7 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(Intent.createChooser(createShareIntent(), "Share using"));
             }
         });
     }
@@ -131,9 +134,12 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+
                     sqlDatabaseManager.getFavouriteDatabaseManager().addBookToFavourites(bookId);
+                    Toast.makeText(getBaseContext(), "Added to Favorites!" , Toast.LENGTH_SHORT).show();
                 } else {
                     sqlDatabaseManager.getFavouriteDatabaseManager().removeFromFavourites(bookId);
+                    Toast.makeText(getBaseContext(), "Removed from Favorites!" , Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -145,6 +151,7 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
             @Override
             public void onClick(View v) {
                 sqlDatabaseManager.getCartDatabaseManager().addToCart(bookId);
+                Toast.makeText(getBaseContext(), "Added to Cart!" , Toast.LENGTH_SHORT).show();
                 // startActivity(new Intent(getBaseContext(), FinalizeOrderActivity.class));
             }
         });
@@ -197,6 +204,16 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         return feedbackView;
     }
 
+    private Intent createShareIntent(){
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        String shareBody = book.getTitle();
+        String shareSub = book.getDescription();
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+        return shareIntent;
+    }
+
 
     @Override
     public Loader<Book> onCreateLoader(int id, Bundle args) {
@@ -209,6 +226,7 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         handleParentView(R.layout.nav_detailed_book_layout);
         loadAllViews();
         if (book != null) {
+            this.book = book;
             configureTextViews(book);
         }
         configureButtons();

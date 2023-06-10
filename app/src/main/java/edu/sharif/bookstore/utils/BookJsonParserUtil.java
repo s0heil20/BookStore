@@ -19,6 +19,7 @@ public class BookJsonParserUtil {
         try {
             JSONObject jsonObject = new JSONObject(booksJson);
             JSONArray itemsArray = jsonObject.getJSONArray("items");
+            System.out.println("Parsing " +itemsArray.length()+" Json objects!");
             for (int i = 0; i < itemsArray.length(); i++) {
                 JSONObject bookJSON = itemsArray.getJSONObject(i);
                 try {
@@ -85,6 +86,7 @@ public class BookJsonParserUtil {
              if (volumeInfo.has("publishedDate")){
                  datePublished = volumeInfo.getString("publishedDate");
              }
+            System.out.println("Parsing successful!");
             return new Book(bookId, title, authors, publisher, datePublished, description, category, imageLink, pageCount);
         } else { throw new JSONException("Book missing volume info!"); }
     }

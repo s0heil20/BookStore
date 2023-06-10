@@ -59,16 +59,22 @@ public class FinalizeOrderActivity extends NavBarActivity implements DatePickerD
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int totalPrice = Integer.valueOf(totalPriceTextView.getText().toString());
+                int totalPrice = Integer.valueOf(totalPriceTextView.getText().toString().substring(0, totalPriceTextView.getText().toString().length()-1));
                 String address = addressText.getText().toString();
                 String date = dateTextView.getText().toString();
-                sqlDatabaseManager.getCartDatabaseManager().finalizeCart(address, date, totalPrice);
+                if (!date.equals("Choose Date")) {
+                    sqlDatabaseManager.getCartDatabaseManager().finalizeCart(address, date, totalPrice);
+                } else {
+                    Toast.makeText(getBaseContext(), "Please Choose Date!" , Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
 
     private void configureTotalCostTextView(TextView totalPriceTextView){
-        // sqlDatabaseManager.getCartDatabaseManager().getBookIds()
+        int totalCost = sqlDatabaseManager.getCartDatabaseManager().getTotalCost();
+        totalPriceTextView.setText(totalCost+"$");
+
     }
 
     private void configureImageButton(ImageView calendarImageButton){

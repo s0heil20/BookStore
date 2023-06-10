@@ -69,9 +69,7 @@ public class MainMenuActivity extends NavBarActivity implements LoaderManager.Lo
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Book>> loader, List<Book> books) {
-        if (books.size() > 0) {
             addBookItemsToRecyclerView(books);
-        }
     }
 
     @Override
