@@ -138,4 +138,9 @@ public class SearchActivity extends NavBarActivity implements LoaderManager.Load
     public void onItemClicked(BookCardItem bookCardItem) {
         startActivity(new Intent(this, DetailedBookActivity.class).putExtra("bookId", bookCardItem.getBookId()));
     }
+
+    @Override
+    public void onDeleteItemClicked(BookCardItem bookCardItem) {
+
+    }
 }
