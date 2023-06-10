@@ -69,6 +69,9 @@ public class CartDatabaseManager implements EntityDatabaseManager {
         return TABLE_NAME;
     }
 
+    public ArrayList<String> getBookIds() {
+        return bookIds;
+    }
 
     public void addToCart(String bookId) {
         bookIds.add(bookId);
