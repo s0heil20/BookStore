@@ -11,8 +11,8 @@ You can sign up and then sign in with your username & password!
 
 ## Main menu
 In this menu, a preview list of books is displayed and you can click on them and you'll be redirected to the detailed book menu!
-![image]([https://github.com/s0heil20/BookStore/assets/59181565/c5a9b233-7f9d-4243-b817-e476f5dfa5f1](https://github.com/s0heil20/BookStore/assets/59181565/c5a9b233-7f9d-4243-b817-e476f5dfa5f1))
-![image]([https://github.com/s0heil20/BookStore/assets/59181565/ab8c4de5-cf2d-4bcb-a152-0149b6944210](https://github.com/s0heil20/BookStore/assets/59181565/ab8c4de5-cf2d-4bcb-a152-0149b6944210))
+![image](https://github.com/s0heil20/BookStore/assets/59181565/c5a9b233-7f9d-4243-b817-e476f5dfa5f1)
+![image]((https://github.com/s0heil20/BookStore/assets/59181565/ab8c4de5-cf2d-4bcb-a152-0149b6944210)
 
 ## Detailed book menu
 In this menu you can see a more detailed preview of the selected book. You can also add it to your cart or to your favorites! You can also share or submit feedback.
