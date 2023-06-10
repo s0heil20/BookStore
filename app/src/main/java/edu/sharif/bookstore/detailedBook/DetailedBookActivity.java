@@ -118,6 +118,8 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DecimalFormat df = new DecimalFormat();
+                df.setMaximumFractionDigits(1);
                 String commentText = commentTextInput.getText().toString();
                 String userName = sqlDatabaseManager.getUserDatabaseManager().getLoggedInUser().getUsername();
                 int rating = (int)ratingBar.getRating();
@@ -127,6 +129,8 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
                 if (!commentText.equals("")) {
                     commentsListDetailed.addView(createFeedbackView(feedback));
                 }
+                ratingTextViewDetailed.setText("Rating: "+df.format(sqlDatabaseManager.getRatingDatabaseManager().getAverageRating(bookId))+"");
+                noRatingTextView.setText("Rating Count: "+sqlDatabaseManager.getRatingDatabaseManager().getTotalRatingNum(bookId)+"");
             }
         });
     }
