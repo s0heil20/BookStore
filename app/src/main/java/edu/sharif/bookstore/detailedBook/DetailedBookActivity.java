@@ -124,7 +124,9 @@ public class DetailedBookActivity extends NavBarActivity implements LoaderManage
                 Feedback feedback = new Feedback(userName, commentText, bookId, rating);
                 sqlDatabaseManager.getFeedbackDatabaseManager().addFeedback(feedback);
                 Toast.makeText(getBaseContext(), "Comment Submitted!" , Toast.LENGTH_SHORT).show();
-                commentsListDetailed.addView(createFeedbackView(feedback));
+                if (!commentText.equals("")) {
+                    commentsListDetailed.addView(createFeedbackView(feedback));
+                }
             }
         });
     }
